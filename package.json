@@ -1,0 +1,29 @@
+{
+  "name": "plugin-visbol",
+  "version": "1.0.0",
+  "description": "A plugin API for web applications to use VisBOL",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjhatch/Plugin-Visual-VisBOL.git"
+  },
+  "keywords": [
+    "VisBOL",
+    "SynBioHub",
+    "Visualization"
+  ],
+  "author": "Benjamin Hatch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjhatch/Plugin-Visual-VisBOL/issues"
+  },
+  "homepage": "https://github.com/benjhatch/Plugin-Visual-VisBOL#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
