@@ -1,7 +1,7 @@
-const serialize = require("serialize-javascript");
+import serialize from "serialize-javascript";
 
 // returning the visbol rendering
-createRendering = (properties, hostAddress) => {
+export const createRendering = (properties, hostAddress) => {
    const content =
    `
    <script type="text/javascript">window.__INITIAL_DATA__ = ${serialize(properties)}</script>
@@ -12,7 +12,7 @@ createRendering = (properties, hostAddress) => {
 };
 
 // returning an error
-createError = (error) => {
+export const createError = (error) => {
    const content =
    `
    Error while parsing the file for VisBOL rendering:
@@ -35,5 +35,3 @@ const populateTemplate = content =>
    </body>
 </html>
 `;
-
-module.exports = { createRendering, createError };

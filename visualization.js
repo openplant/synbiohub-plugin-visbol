@@ -1,7 +1,8 @@
-const React = require("react");
-const { render } = require("react-dom");
-const Renderer = require('visbol-react').default;
-const prepareDisplay = require('visbol').prepareDisplay;
+import React from "react";
+import { render } from "react-dom";
+import RenderingMethod from 'visbol-react';
+import { prepareDisplay } from 'visbol';
+const Renderer = RenderingMethod.default;
 
 // change non iterable obejct to iterable object, then can use spread operator
 function* iterate_object(o) {

@@ -1,8 +1,8 @@
-const express = require('express');
-const { createRendering, createError } = require('./templates.js');
-const { getSBOLFromUrl } = require('./tools.js');
-const { createDisplay } = require('visbol');
-const path = require("path");
+import express from 'express';
+import { createRendering, createError } from './templates.js';
+import { getSBOLFromUrl } from './tools.js';
+import { createDisplay } from 'visbol';
+import path from "path";
 
 // set up server
 const app = express();
