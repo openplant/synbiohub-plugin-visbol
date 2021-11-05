@@ -1,5 +1,7 @@
 import express from 'express';
-import { getSBOLFromFile } from './tools';
+import { createRendering, createError } from './templates.js';
+import { getSBOLFromUrl } from './tools.js';
+import { createDisplay, prepareDisplay } from 'visbol';
 
 // set up server
 const app = express();
@@ -31,12 +33,15 @@ app.post('/Run', async (req, res) => {
    const hostAddress = req.get("host");
    console.log(`Run url=${url} : host address=${hostAddress}`);
    try {
-      const sbol = await getSBOLFromFile(url);
+      const sbol = await getSBOLFromUrl(url);
+      const displayList = await createDisplay(sbol);
+      const preparedDisplay = prepareDisplay(displayList);
+      
+      res.send(createRendering(properties, hostAddress));
    }
    catch (error) {
-      res.send(errorTemplate);
+      res.send(createError(error));
    }
-   // res.status(200).send("Run VisBOL on sbol file");
 });
 
 // start server

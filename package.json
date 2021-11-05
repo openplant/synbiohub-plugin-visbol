@@ -24,8 +24,12 @@
   },
   "homepage": "https://github.com/benjhatch/Plugin-Visual-VisBOL#readme",
   "dependencies": {
+    "axios": "^0.24.0",
     "express": "^4.17.1",
+    "sbolmeta": "^0.3.2",
     "serialize-javascript": "^6.0.0",
+    "sha1": "^1.1.1",
+    "urijs": "^1.19.7",
     "visbol": "^2.0.17",
     "visbol-react": "^1.0.68"
   }
