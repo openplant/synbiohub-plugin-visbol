@@ -1,5 +1,5 @@
 import express from 'express';
-
+import { getSBOLFromFile } from './tools';
 
 // set up server
 const app = express();
@@ -26,11 +26,17 @@ app.post('/Evaluate', (req, res) => {
 
 // ACCESS: PUBLIC
 //  Route = /Run
-app.post('/Run', (req, res) => {
+app.post('/Run', async (req, res) => {
    const url = req.body.complete_sbol;
    const hostAddress = req.get("host");
    console.log(`Run url=${url} : host address=${hostAddress}`);
-   res.status(200).send("Run VisBOL on sbol file");
+   try {
+      const sbol = await getSBOLFromFile(url);
+   }
+   catch (error) {
+      res.send(errorTemplate);
+   }
+   // res.status(200).send("Run VisBOL on sbol file");
 });
 
 // start server
