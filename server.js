@@ -2,6 +2,7 @@ import express from 'express';
 import { createRendering, createError } from './templates.js';
 import { getSBOLFromUrl } from './tools.js';
 import { createDisplay, prepareDisplay } from 'visbol';
+import path from "path";
 
 // set up server
 const app = express();
@@ -10,9 +11,9 @@ const address = "localhost";
 
 app.use(express.json());
 
-
 // ACCESS: PUBLIC
 // Route = /Status
+// Returns whether plugin is up and running
 app.get('/Status', (req, res) => {
    console.log('Status checked');
    res.status(200).send("VisBOL plugin up and running");
@@ -20,6 +21,9 @@ app.get('/Status', (req, res) => {
 
 // ACCESS: PUBLIC
 // Route = /Evaluate
+// Returns whether type is compatible with plugin
+// (this needs to be developed more, don't know all
+// the types VisBOL is compatible with)
 app.post('/Evaluate', (req, res) => {
    const type = req.body.type;
    console.log(`Evaluating ${type}`);
@@ -27,7 +31,9 @@ app.post('/Evaluate', (req, res) => {
 });
 
 // ACCESS: PUBLIC
-//  Route = /Run
+// Route = /Run
+// Returns html for VisBOL rendering
+// in a web application
 app.post('/Run', async (req, res) => {
    const url = req.body.complete_sbol;
    const hostAddress = req.get("host");
@@ -36,12 +42,26 @@ app.post('/Run', async (req, res) => {
       const sbol = await getSBOLFromUrl(url);
       const displayList = await createDisplay(sbol);
       const preparedDisplay = prepareDisplay(displayList);
+
+      const properties = {
+         display: preparedDisplay
+      }
       
       res.send(createRendering(properties, hostAddress));
    }
    catch (error) {
       res.send(createError(error));
    }
+});
+
+// ACCESS: PUBLIC
+// Route = /visbol.js
+// Gets built rendering file to be sent
+// to browser
+app.get('/visbol.js', (req, res) => {
+   console.log('Getting rendering file');
+   const __dirname = path.resolve();
+   res.sendFile(path.join(__dirname, 'dist', 'main.js'));
 });
 
 // start server

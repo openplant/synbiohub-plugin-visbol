@@ -4,9 +4,8 @@ import serialize from "serialize-javascript";
 export const createRendering = (properties, hostAddress) => {
    const content =
    `
-   <script type="text/javascript">
-      window.__INITIAL_DATA__ = ${serialize(properties)}
-   </script>
+   <script type="text/javascript">window.__INITIAL_DATA__ = ${serialize(properties)}</script>
+   <script type="text/javascript" src="https://${hostAddress}/visbol.js" charset="utf-8"></script>
    `;
 
    return populateTemplate(content);
@@ -30,7 +29,7 @@ const populateTemplate = content =>
 <html>
    <head><title>VisBOL</title></head>
    <body>
-      <div id="visbol-rendering">
+      <div id="plugin-visual-visbol">
       ${content}
       </div>
    </body>
