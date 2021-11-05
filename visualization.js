@@ -1,6 +1,7 @@
-import React from "react";
-import { hydrate } from "react-dom";
-import Rendering from 'visbol-react';
+const React = require("react");
+const { render } = require("react-dom");
+const Renderer = require('visbol-react').default;
+const prepareDisplay = require('visbol').prepareDisplay;
 
 // change non iterable obejct to iterable object, then can use spread operator
 function* iterate_object(o) {
@@ -9,9 +10,11 @@ function* iterate_object(o) {
       yield [keys[i], o[keys[i]]];
    }
 }
-var data = {}
+const data = {};
 for (var [key, val] of iterate_object(window.__INITIAL_DATA__)) {
    data[key] = val;
 }
 
-hydrate(<Rendering {...data} />, document.getElementById('plugin-visual-visbol'));
+const display = prepareDisplay(data.displayList);
+
+render(<Renderer display={display} />, document.getElementById("plugin-visual-visbol"));

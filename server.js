@@ -1,8 +1,8 @@
-import express from 'express';
-import { createRendering, createError } from './templates.js';
-import { getSBOLFromUrl } from './tools.js';
-import { createDisplay, prepareDisplay } from 'visbol';
-import path from "path";
+const express = require('express');
+const { createRendering, createError } = require('./templates.js');
+const { getSBOLFromUrl } = require('./tools.js');
+const { createDisplay } = require('visbol');
+const path = require("path");
 
 // set up server
 const app = express();
@@ -41,10 +41,9 @@ app.post('/Run', async (req, res) => {
    try {
       const sbol = await getSBOLFromUrl(url);
       const displayList = await createDisplay(sbol);
-      const preparedDisplay = prepareDisplay(displayList);
 
       const properties = {
-         display: preparedDisplay
+         displayList
       }
       
       res.send(createRendering(properties, hostAddress));

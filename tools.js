@@ -1,8 +1,10 @@
 // functions used in server.js
 
-import axios from "axios";
+const axios = require("axios");
 
-export async function getSBOLFromUrl(fileUrl) {
+async function getSBOLFromUrl(fileUrl) {
    const response = await axios.get(fileUrl);
    return response.data;
 }
+
+module.exports = { getSBOLFromUrl };
