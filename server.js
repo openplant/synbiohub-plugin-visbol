@@ -2,6 +2,7 @@ import express from 'express';
 import { createRendering, createError } from './templates.js';
 import { getSBOLFromUrl } from './tools.js';
 import { createDisplay } from 'visbol';
+import exportSVG from './createSVG.js';
 import path from "path";
 
 // set up server
@@ -35,18 +36,26 @@ app.post('/Evaluate', (req, res) => {
 // Returns html for VisBOL rendering
 // in a web application
 app.post('/Run', async (req, res) => {
-   const url = req.body.complete_sbol;
+   let url = req.body.complete_sbol;
+   const type = req.body.type;
    const hostAddress = req.get("host");
+   if (type === 'Layout')
+      url = url.replace('https://synbiohub.org', 'http://localhost:7777');
    console.log(`Run url=${url} : host address=${hostAddress}`);
    try {
       const sbol = await getSBOLFromUrl(url);
-      const displayList = await createDisplay(sbol);
+      if (type !== 'Layout') {
+         const displayList = await createDisplay(sbol);
 
-      const properties = {
-         displayList
+         const properties = {
+            displayList
+         }
+         
+         res.send(createRendering(properties, hostAddress));
+      } else {
+         console.log('render layout');
+         res.status(200).send();
       }
-      
-      res.send(createRendering(properties, hostAddress));
    }
    catch (error) {
       res.send(createError(error));
