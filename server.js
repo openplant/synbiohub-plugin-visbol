@@ -53,8 +53,9 @@ app.post('/Run', async (req, res) => {
          
          res.send(createRendering(properties, hostAddress));
       } else {
+         exportSVG();
          console.log('render layout');
-         res.status(200).send();
+         res.send(createRendering({}, hostAddress));
       }
    }
    catch (error) {
