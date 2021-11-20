@@ -1,6 +1,6 @@
 import express from 'express';
 import { createRendering, createError } from './templates.js';
-import { getSBOLFromUrl } from './tools.js';
+import { getSBOLFromUrl, convertSBOLtoMxGraph, mxGraphToPNG } from './tools.js';
 import { createDisplay } from 'visbol';
 import path from "path";
 
@@ -27,7 +27,7 @@ app.get('/Status', (req, res) => {
 app.post('/Evaluate', (req, res) => {
    const type = req.body.type;
    console.log(`Evaluating ${type}`);
-   if (type == 'Component' || type == 'ComponentDefinition')
+   if (type == 'Component' || type == 'ComponentDefinition' || type == 'Layout')
       res.status(200).send(`The type ${type} is compatible with the VisBOL plugin`);
    else
       res.status(415).send(`The type ${type} is NOT compatible with the VisBOL plugin`);
@@ -56,7 +56,9 @@ app.post('/Run', async (req, res) => {
          res.send(createRendering(properties, hostAddress));
       } else {
          console.log('render layout in SBOLCanvas');
-         res.send(createRendering({}, hostAddress));
+         const mxGraph = await convertSBOLtoMxGraph(sbol);
+         await mxGraphToPNG(mxGraph);
+         res.status(200).send('SBOLCanvas image has been downloaded');
       }
    }
    catch (error) {
@@ -69,7 +71,6 @@ app.post('/Run', async (req, res) => {
 // Gets built rendering file to be sent
 // to browser
 app.get('/visbol.js', (req, res) => {
-   console.log('Getting rendering file');
    const __dirname = path.resolve();
    res.sendFile(path.join(__dirname, 'dist', 'main.js'));
 });
