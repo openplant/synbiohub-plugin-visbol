@@ -2,7 +2,6 @@ import express from 'express';
 import { createRendering, createError } from './templates.js';
 import { getSBOLFromUrl } from './tools.js';
 import { createDisplay } from 'visbol';
-import exportSVG from './createSVG.js';
 import path from "path";
 
 // set up server
@@ -28,7 +27,10 @@ app.get('/Status', (req, res) => {
 app.post('/Evaluate', (req, res) => {
    const type = req.body.type;
    console.log(`Evaluating ${type}`);
-   res.status(200).send("Type is compatible with the VisBOL plugin");
+   if (type == 'Component' || type == 'ComponentDefinition')
+      res.status(200).send(`The type ${type} is compatible with the VisBOL plugin`);
+   else
+      res.status(415).send(`The type ${type} is NOT compatible with the VisBOL plugin`);
 });
 
 // ACCESS: PUBLIC
@@ -53,8 +55,7 @@ app.post('/Run', async (req, res) => {
          
          res.send(createRendering(properties, hostAddress));
       } else {
-         exportSVG();
-         console.log('render layout');
+         console.log('render layout in SBOLCanvas');
          res.send(createRendering({}, hostAddress));
       }
    }
