@@ -2,12 +2,9 @@
    * Decodes the given string (xml) representation of a graph
    * and uses it to replace the current graph
    */
- export default function setGraphToXML(graphString) {
-   GraphBase.unFormatedCells.clear();
-   this.graph.home();
-   this.graph.getModel().clear();
+ export default function setGraphToXML(xml) {
 
-   const doc = mx.mxUtils.parseXml(graphString);
+   const doc = mx.mxUtils.parseXml(xml);
    const codec = new mx.mxCodec(doc);
    codec.decode(doc.documentElement, this.graph.getModel());
 
