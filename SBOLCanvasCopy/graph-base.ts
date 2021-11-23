@@ -71,13 +71,13 @@ export class GraphBase {
 
 
     // class variables
-    graph: mxGraph;
-    editor: mxEditor;
+    graph: typeof mxGraph;
+    editor: typeof mxEditor;
     graphContainer: HTMLElement;
 
     // Keeps track of the cell order we entered
-    viewStack: mxCell[];
-    selectionStack: mxCell[];
+    viewStack: typeof mxCell[];
+    selectionStack: typeof mxCell[];
 
     // Boolean for keeping track of whether we are showing scars or not in the graph.
     showingScars: boolean = true;
@@ -1166,7 +1166,7 @@ export class GraphBase {
                 }
 
                 // sync circuit containers
-                let circuitContainers = new Set<mxCell>();
+                let circuitContainers = new Set<typeof mxCell>();
                 for (let movedCell of movedCells) {
                     if (movedCell.isSequenceFeatureGlyph()) {
                         circuitContainers.add(movedCell.getParent());
@@ -1221,7 +1221,7 @@ export class GraphBase {
         }
     }
 
-    protected validateInteraction(interactionType: string, source: mxCell, target: mxCell) {
+    protected validateInteraction(interactionType: string, source: typeof mxCell, target: typeof mxCell) {
 
         // edges can't connect to edges
         if((source && source.isEdge()) || (target && target.isEdge())){
