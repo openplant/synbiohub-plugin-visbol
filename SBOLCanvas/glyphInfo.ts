@@ -1,5 +1,5 @@
-import { CanvasAnnotation } from './canvasAnnotation';
-import { Info } from './info';
+import { CanvasAnnotation } from './canvasAnnotation.js';
+import { Info } from './info.js';
 
 export class GlyphInfo extends Info{
   // Remember that when you change this you need to change the encode function in graph service

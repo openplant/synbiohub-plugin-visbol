@@ -1,16 +1,16 @@
 import * as mxEditor from 'mxgraph';
 import * as mxGraph from 'mxgraph';
 import * as mxCell from 'mxgraph';
-import { GlyphInfo } from './glyphInfo';
-import { InteractionInfo } from './interactionInfo';
-import { GlyphService } from './glyph.service';
-import { CanvasAnnotation } from './canvasAnnotation';
-import { environment } from './environment';
-import { ModuleInfo } from './moduleInfo';
-import { CombinatorialInfo } from './combinatorialInfo';
-import { VariableComponentInfo } from './variableComponentInfo';
-import { IdentifiedInfo } from './identifiedInfo';
-import { CustomShapes } from './CustomShapes';
+import { GlyphInfo } from './glyphInfo.js';
+import { InteractionInfo } from './interactionInfo.js';
+import { GlyphService } from './glyph.service.js';
+import { CanvasAnnotation } from './canvasAnnotation.js';
+import { environment } from './environment.js';
+import { ModuleInfo } from './moduleInfo.js';
+import { CombinatorialInfo } from './combinatorialInfo.js';
+import { VariableComponentInfo } from './variableComponentInfo.js';
+import { IdentifiedInfo } from './identifiedInfo.js';
+import { CustomShapes } from './CustomShapes.js';
 
 // mx is used here as the typings file for mxgraph isn't up to date.
 // Also if it weren't exported, other classes wouldn't get our extensions of the mxCell class.

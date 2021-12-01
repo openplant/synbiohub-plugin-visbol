@@ -7,11 +7,8 @@ global.XMLSerializer = window.XMLSerializer;
 global.navigator = window.navigator;
 global.DOMParser = window.DOMParser;
 
-import XMLHttpRequest from 'xhr2';
-global.XMLHttpRequest = XMLHttpRequest;
-
-import { GraphService } from './graph.service';
-import { GlyphService } from './glyph.service';
+import { GraphService } from './graph.service.js';
+import { GlyphService } from './glyph.service.js';
 
 const service = new GraphService(new GlyphService());
 

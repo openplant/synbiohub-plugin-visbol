@@ -1,4 +1,4 @@
-import { Info } from './info';
+import { Info } from './info.js';
 
 export class InteractionInfo extends Info {
   // Remember that when you change this you need to change the encode function in graph service

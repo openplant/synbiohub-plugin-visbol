@@ -113,7 +113,7 @@ export class GlyphService {
   loadXMLs(xml_list, glyph_list) {
     xml_list.forEach((filename) => {
       const __dirname = path.resolve();
-      let req = mx.mxUtils.parseXml(fs.readFileSync(path.join(__dirname, "SBOLCanvasCopy", filename)));
+      let req = mx.mxUtils.parseXml(fs.readFileSync(path.join(__dirname, "SBOLCanvas", filename)));
       let root = req.documentElement;
       let shape = root.firstChild;
 

@@ -7,18 +7,18 @@
 ///// <reference path="./graph-base.ts"/>
 
 import * as mxCell from 'mxgraph';
-import { GlyphInfo } from './glyphInfo';
+import { GlyphInfo } from './glyphInfo.js';
 // import { MetadataService } from './metadata.service';
-import { GlyphService } from './glyph.service';
-import { InteractionInfo } from './interactionInfo';
-import { environment } from './environment';
-import { GraphEdits } from './graph-edits';
-import { GraphBase, mx } from './graph-base';
-import { GraphHelpers } from './graph-helpers';
-import { StyleInfo } from './style-info';
-import { ModuleInfo } from './moduleInfo';
-import { Info } from './info';
-import { CombinatorialInfo } from './combinatorialInfo';
+import { GlyphService } from './glyph.service.js';
+import { InteractionInfo } from './interactionInfo.js';
+import { environment } from './environment.js';
+import { GraphEdits } from './graph-edits.js';
+import { GraphBase, mx } from './graph-base.js';
+import { GraphHelpers } from './graph-helpers.js';
+import { StyleInfo } from './style-info.js';
+import { ModuleInfo } from './moduleInfo.js';
+import { Info } from './info.js';
+import { CombinatorialInfo } from './combinatorialInfo.js';
 
 export class GraphService extends GraphHelpers {
 
@@ -749,7 +749,6 @@ export class GraphService extends GraphHelpers {
       this.graph.getModel().endUpdate();
     }
 
-    console.log(this.graph.getModel().cells);
   }
 
   makeInteractionNodeDragsource(element, stylename) {
@@ -1081,7 +1080,6 @@ export class GraphService extends GraphHelpers {
   }
 
   exportSVG(filename: string) {
-    console.log(filename);
     var background = '#ffffff';
     var scale = 1;
     var border = 1;
@@ -1111,7 +1109,7 @@ export class GraphService extends GraphHelpers {
       root.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', mx.mxConstants.NS_XLINK);
     }
 
-    root.setAttribute('width', (Math.ceil(bounds.width * scale / vs) + 2 * border) + 'px');
+    root.setAttribute('width', (Math.ceil(bounds.width * scale / vs) + 2 * border + 10) + 'px');
     root.setAttribute('height', (Math.ceil(bounds.height * scale / vs) + 2 * border) + 'px');
     root.setAttribute('version', '1.1');
 
@@ -1130,9 +1128,8 @@ export class GraphService extends GraphHelpers {
     svgCanvas.foAltText = '[Not supported by viewer]';
     imgExport.drawState(this.graph.getView().getState(this.graph.getCurrentRoot()), svgCanvas);
 
-    var xml = encodeURIComponent(mx.mxUtils.getXml(root));
-    console.log(xml);
-    new mx.mxXmlRequest(environment.backendURL + '/echo', 'filename=' + filename + '.svg&format=svg' + '&xml=' + xml).simulate(document, '_blank');
+    var xml = mx.mxUtils.getXml(root).replace("alpha=\"NaN\"", "alpha=\"1\"");
+    return xml;
   }
 
   exportImage(filename: string, format: string) {
@@ -1162,8 +1159,12 @@ export class GraphService extends GraphHelpers {
     if (bg != null) {
       bg = '&bg=' + bg;
     }
-    console.log(xml);
-    console.log(encodeURIComponent(xml));
+
+    return {
+      width: w,
+      height: h,
+      xml: encodeURIComponent(xml.replace("alpha=\"NaN\"", "alpha=\"1\""))
+    }
     // new mx.mxXmlRequest(environment.backendURL + '/export', 'filename=' + filename + '.' + format + '&format=' + format + bg + '&w=' + w + '&h=' + h + '&xml=' + encodeURIComponent(xml)).simulate(document, '_blank');
   }
 
@@ -1185,18 +1186,13 @@ export class GraphService extends GraphHelpers {
     this.graph.home();
     this.graph.getModel().clear();
 
-    console.log(graphString);
-
     const doc = mx.mxUtils.parseXml(graphString);
     const codec = new mx.mxCodec(doc);
     codec.decode(doc.documentElement, this.graph.getModel());
-    console.log(this.graph.getModel());
 
     // The child of cell 1 that isn't a view cell points to the root view
     const cell1 = this.graph.getModel().getCell("1");
-    console.log(cell1);
     let viewCells = this.graph.getModel().getChildren(cell1);
-    console.log(viewCells);
     let rootViewCell;
     for (let child of viewCells) {
       if (!child.isViewCell()) {

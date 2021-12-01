@@ -1,19 +1,14 @@
-import { Info } from './info.js';
-
-
-export class ModuleInfo extends Info{
-    static counter: number = 0;
-    name: string;
-    description: string;
-    version: string;
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ModuleInfo = void 0;
+const info_js_1 = require("./info.js");
+class ModuleInfo extends info_js_1.Info {
     constructor() {
         super();
         this.displayID = 'module' + (ModuleInfo.counter++);
     }
-
-    makeCopy(): ModuleInfo {
-        const copy: ModuleInfo = new ModuleInfo();
+    makeCopy() {
+        const copy = new ModuleInfo();
         copy.displayID = this.displayID;
         copy.name = this.name;
         copy.description = this.description;
@@ -21,24 +16,21 @@ export class ModuleInfo extends Info{
         copy.uriPrefix = this.uriPrefix;
         return copy;
     }
-
-    copyDataFrom(other: ModuleInfo) {
+    copyDataFrom(other) {
         this.displayID = other.displayID;
         this.name = other.name;
         this.description = other.description;
         this.version = other.version;
         this.uriPrefix = other.uriPrefix;
     }
-
-    getFullURI(): string {
+    getFullURI() {
         let fullURI = this.uriPrefix + '/' + this.displayID;
         if (this.version && this.version.length > 0) {
             fullURI += '/' + this.version;
         }
         return fullURI;
     }
-
-    encode(enc: any) {
+    encode(enc) {
         let node = enc.document.createElement('ModuleInfo');
         if (this.displayID)
             node.setAttribute("displayID", this.displayID);
@@ -50,7 +42,8 @@ export class ModuleInfo extends Info{
             node.setAttribute("version", this.version);
         if (this.uriPrefix)
             node.setAttribute("uriPrefix", this.uriPrefix);
-
         return node;
     }
 }
+exports.ModuleInfo = ModuleInfo;
+ModuleInfo.counter = 0;

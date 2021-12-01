@@ -1,21 +1,21 @@
 /// <reference path="./graph-base.ts"/>
 
-import { GlyphService } from './glyph.service';
-import { GraphEdits } from './graph-edits';
-import { GlyphInfo } from './glyphInfo';
+import { GlyphService } from './glyph.service.js';
+import { GraphEdits } from './graph-edits.js';
+import { GlyphInfo } from './glyphInfo.js';
 import * as mxCell from 'mxgraph';
 import * as mxDragSource from 'mxgraph';
 import * as mxGraph from 'mxgraph';
-import { GraphBase, mx } from './graph-base';
-import { GraphService } from './graph.service';
-import { StyleInfo } from './style-info';
-import { environment } from './environment';
-import { Info } from './info';
-import { ModuleInfo } from './moduleInfo';
-import { CombinatorialInfo } from './combinatorialInfo';
-import { VariableComponentInfo } from './variableComponentInfo';
-import { IdentifiedInfo } from './identifiedInfo';
-import { InteractionInfo } from './interactionInfo';
+import { GraphBase, mx } from './graph-base.js';
+import { GraphService } from './graph.service.js';
+import { StyleInfo } from './style-info.js';
+import { environment } from './environment.js';
+import { Info } from './info.js';
+import { ModuleInfo } from './moduleInfo.js';
+import { CombinatorialInfo } from './combinatorialInfo.js';
+import { VariableComponentInfo } from './variableComponentInfo.js';
+import { IdentifiedInfo } from './identifiedInfo.js';
+import { InteractionInfo } from './interactionInfo.js';
 
 /**
  * Extension of the graph base that should contain helper methods to be used in the GraphService.

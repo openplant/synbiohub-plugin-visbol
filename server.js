@@ -1,8 +1,8 @@
-import express from 'express';
-import { createRendering, createError } from './templates.js';
-import { getSBOLFromUrl, convertSBOLtoMxGraph, mxGraphToPNG } from './tools.js';
-import { createDisplay } from 'visbol';
-import path from "path";
+const express = require('express');
+const { createRendering, createError, createSVG } = require('./templates.js');
+const { getSBOLFromUrl, convertSBOLtoMxGraph, mxGraphToSVG } = require('./tools.js');
+const { createDisplay } = require('visbol');
+const path = require("path");
 
 // set up server
 const app = express();
@@ -55,10 +55,10 @@ app.post('/Run', async (req, res) => {
          
          res.send(createRendering(properties, hostAddress));
       } else {
-         console.log('render layout in SBOLCanvas');
          const mxGraph = await convertSBOLtoMxGraph(sbol);
-         await mxGraphToPNG(mxGraph);
-         res.status(200).send('SBOLCanvas image has been downloaded');
+         const svg = mxGraphToSVG(mxGraph);
+         console.log(svg);
+         res.send(createSVG(svg));
       }
    }
    catch (error) {

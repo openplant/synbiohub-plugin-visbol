@@ -1,7 +1,7 @@
-import React from "react";
-import { render } from "react-dom";
-import RenderingMethod from 'visbol-react';
-import { prepareDisplay } from 'visbol';
+const React = require("react");
+const { render } = require("react-dom");
+const RenderingMethod = require('visbol-react');
+const { prepareDisplay } = require('visbol');
 const Renderer = RenderingMethod.default;
 
 // change non iterable obejct to iterable object, then can use spread operator

@@ -1,4 +1,4 @@
-import { IdentifiedInfo } from './identifiedInfo';
+import { IdentifiedInfo } from './identifiedInfo.js';
 
 export class VariableComponentInfo {
     uri: string;

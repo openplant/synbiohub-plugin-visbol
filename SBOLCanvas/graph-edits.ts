@@ -1,9 +1,8 @@
 import * as mxCell from 'mxgraph';
-import { GlyphInfo } from './glyphInfo';
-import { mxGraphView } from './mxgraph';
-import { GraphService } from './graph.service';
-import { Info } from './info';
-import { mx, GraphBase } from './graph-base';
+import { mxGraphView } from './mxgraph.js';
+import { GraphService } from './graph.service.js';
+import { Info } from './info.js';
+import { mx, GraphBase } from './graph-base.js';
 
 /**
  * Contains all the custom edit objects necessary for mxGraph.
