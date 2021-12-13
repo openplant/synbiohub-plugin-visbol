@@ -940,7 +940,7 @@ class GraphHelpers extends graph_base_js_1.GraphBase {
                 let stringToReplace = styleString.slice(startIdx, endIdx - startIdx);
                 styleString = styleString.replace(stringToReplace, name);
             }
-            console.debug("changing interaction style to: " + styleString);
+            // console.debug("changing interaction style to: " + styleString);
             this.graph.getModel().setStyle(cell, styleString);
         }
         finally {
@@ -1044,28 +1044,6 @@ class GraphHelpers extends graph_base_js_1.GraphBase {
         return false;
     }
     handleSelectionChange(sender, evt) {
-        // 'added' and 'removed' properties are reversed in mxGraph
-        var cellsRemoved = evt.getProperty('added');
-        var cellsAdded = evt.getProperty('removed');
-        console.debug("----handleSelectionChange-----");
-        console.debug("cells removed: ");
-        if (cellsRemoved) {
-            for (var i = 0; i < cellsRemoved.length; i++) {
-                console.debug(cellsRemoved[i]);
-            }
-        }
-        console.debug("cells added: ");
-        if (cellsAdded) {
-            for (var i = 0; i < cellsAdded.length; i++) {
-                console.debug(cellsAdded[i]);
-            }
-        }
-        console.debug("Current root: ");
-        console.debug(this.graph.getCurrentRoot());
-        console.debug("Undo manager: ");
-        console.debug(this.editor.undoManager);
-        console.debug("Graph Model: ");
-        console.debug(this.graph.getModel());
         // Don't just use the new cells though, use all currently selected ones.
         this.updateAngularMetadata(this.graph.getSelectionCells());
     }
@@ -1421,7 +1399,7 @@ class GraphHelpers extends graph_base_js_1.GraphBase {
     }
     removeViewCell(viewCell) {
         if (!viewCell || !viewCell.isViewCell()) {
-            console.debug("Tried to remove a view cell that isn't a view cell!");
+            console.log("Tried to remove a view cell that isn't a view cell!");
             return;
         }
         // remove the cell

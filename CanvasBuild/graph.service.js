@@ -142,7 +142,7 @@ class GraphService extends graph_helpers_js_1.GraphHelpers {
             this.showingScars = true;
         }
         // We hide scar glyphs by setting their widths to 0.
-        console.debug("showing scars now equals " + this.showingScars);
+        // console.log("showing scars now equals " + this.showingScars);
         this.setAllScars(this.showingScars);
     }
     /**
@@ -172,7 +172,7 @@ class GraphService extends graph_helpers_js_1.GraphHelpers {
         let children = circuitContainer.children;
         for (let i = 0; i < children.length; i++) {
             if (children[i].isScar()) {
-                console.debug("scar found");
+                // console.debug("scar found");
                 let child = children[i];
                 const geo = new graph_base_js_1.mx.mxGeometry(0, 0, 0, 0);
                 geo.x = 0;
@@ -216,18 +216,18 @@ class GraphService extends graph_helpers_js_1.GraphHelpers {
                     if (cell.isSequenceFeatureGlyph()) {
                         // Make the cell face east/west
                         let direction = this.graph.getCellStyle(cell)[graph_base_js_1.mx.mxConstants.STYLE_DIRECTION];
-                        console.debug("current glyph direction setting = " + direction);
+                        // console.debug("current glyph direction setting = " + direction);
                         if (direction == undefined) {
                             console.warn("direction style undefined. Assuming east, and turning to west");
                             this.graph.setCellStyles(graph_base_js_1.mx.mxConstants.STYLE_DIRECTION, "west", [cell]);
                         }
                         else if (direction === "east") {
                             this.graph.setCellStyles(graph_base_js_1.mx.mxConstants.STYLE_DIRECTION, "west", [cell]);
-                            console.debug("turning west");
+                            // console.debug("turning west");
                         }
                         else if (direction == "west") {
                             this.graph.setCellStyles(graph_base_js_1.mx.mxConstants.STYLE_DIRECTION, "east", [cell]);
-                            console.debug("turning east");
+                            // console.debug("turning east");
                         }
                     }
                     else if (cell.isInteraction()) {
