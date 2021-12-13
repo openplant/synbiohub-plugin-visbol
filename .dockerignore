@@ -1,1 +1,7 @@
 Dockerfile
+node_modules
+.git
+.gitignore
+README.md
+.vscode
+npm-debug.log
