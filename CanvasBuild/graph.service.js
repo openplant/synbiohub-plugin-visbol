@@ -24,8 +24,8 @@ const graph_helpers_js_1 = require("./graph-helpers.js");
 const moduleInfo_js_1 = require("./moduleInfo.js");
 const combinatorialInfo_js_1 = require("./combinatorialInfo.js");
 class GraphService extends graph_helpers_js_1.GraphHelpers {
-    constructor(glyphService) {
-        super(glyphService);
+    constructor(glyphService, metadataService) {
+        super(glyphService, metadataService);
         this.graph.getSelectionModel().addListener(graph_base_js_1.mx.mxEvent.CHANGE, graph_base_js_1.mx.mxUtils.bind(this, this.handleSelectionChange));
     }
     isSelectedAGlyph() {
@@ -1106,7 +1106,7 @@ class GraphService extends graph_helpers_js_1.GraphHelpers {
             graph_base_js_1.GraphBase.unFormatedCells.clear();
         }
         this.fitCamera();
-        // this.metadataService.setComponentDefinitionMode(this.graph.getCurrentRoot().isComponentView());
+        this.metadataService.setComponentDefinitionMode(this.graph.getCurrentRoot().isComponentView());
         // top level compDefs may not have cells referencing them, but they still end up with view cells for other reasons
         this.trimUnreferencedCells();
         this.editor.undoManager.clear();
@@ -1456,7 +1456,7 @@ class GraphService extends graph_helpers_js_1.GraphHelpers {
             this.viewStack.push(rootViewCell);
             this.addBackbone();
         }
-        // this.metadataService.setComponentDefinitionMode(!moduleMode);
+        this.metadataService.setComponentDefinitionMode(!moduleMode);
         this.updateAngularMetadata(this.graph.getSelectionCells());
         this.editor.undoManager.clear();
     }
@@ -1466,7 +1466,7 @@ class GraphService extends graph_helpers_js_1.GraphHelpers {
      * @param componentMode True if you want to be in component mode, false if module mode.
      */
     setComponentDefinitionMode(componentMode) {
-        // this.metadataService.setComponentDefinitionMode(componentMode);
+        this.metadataService.setComponentDefinitionMode(componentMode);
     }
 }
 exports.GraphService = GraphService;

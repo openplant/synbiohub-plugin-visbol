@@ -9,8 +9,9 @@ global.DOMParser = window.DOMParser;
 
 import { GraphService } from './graph.service.js';
 import { GlyphService } from './glyph.service.js';
+import { MetadataService } from "./metadata.service.js";
 
-const service = new GraphService(new GlyphService());
+const service = new GraphService(new GlyphService(), new MetadataService());
 
 export default function getImageOutput(xml) {
    service.setGraphToXML(xml);

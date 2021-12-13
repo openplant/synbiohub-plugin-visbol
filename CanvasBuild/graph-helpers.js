@@ -27,8 +27,9 @@ const identifiedInfo_js_1 = require("./identifiedInfo.js");
  * Note that doing so will make the helper only usable in the GraphService.
  */
 class GraphHelpers extends graph_base_js_1.GraphBase {
-    constructor(glyphService) {
+    constructor(glyphService, metadataService) {
         super(glyphService);
+        this.metadataService = metadataService;
         // initalize the GlyphInfoDictionary
         const cell0 = this.graph.getModel().getCell(0);
         const infoDict = [];
@@ -1080,7 +1081,7 @@ class GraphHelpers extends graph_base_js_1.GraphBase {
         // style first.
         if (cells && cells.length > 0) {
             const styleInfo = new style_info_js_1.StyleInfo(cells, this.graph);
-            // this.metadataService.setSelectedStyleInfo(styleInfo);
+            this.metadataService.setSelectedStyleInfo(styleInfo);
         }
         if (cells.length > 1) {
             // multiple selections? can't display glyph data
@@ -1098,7 +1099,7 @@ class GraphHelpers extends graph_base_js_1.GraphBase {
             else
                 moduleInfo = this.getFromInfoDict(cell.value);
             if (moduleInfo) {
-                // this.metadataService.setSelectedModuleInfo(moduleInfo.makeCopy());
+                this.metadataService.setSelectedModuleInfo(moduleInfo.makeCopy());
             }
         }
         else if ((!cell && this.graph.getCurrentRoot().isComponentView()) || (cell && (cell.isSequenceFeatureGlyph() || cell.isMolecularSpeciesGlyph() || cell.isCircuitContainer()))) {
@@ -1108,13 +1109,13 @@ class GraphHelpers extends graph_base_js_1.GraphBase {
             else
                 glyphInfo = this.getFromInfoDict(cell.value);
             if (glyphInfo) {
-                // this.metadataService.setSelectedGlyphInfo(glyphInfo.makeCopy());
+                this.metadataService.setSelectedGlyphInfo(glyphInfo.makeCopy());
             }
         }
         else if (cell.isInteraction() || cell.isInteractionNode()) {
             let interactionInfo = this.getFromInteractionDict(cell.value);
             if (interactionInfo) {
-                // this.metadataService.setSelectedInteractionInfo(interactionInfo.makeCopy());
+                this.metadataService.setSelectedInteractionInfo(interactionInfo.makeCopy());
             }
         }
         // combinatorial info
@@ -1124,15 +1125,15 @@ class GraphHelpers extends graph_base_js_1.GraphBase {
                 combinatorialInfo = new combinatorialInfo_js_1.CombinatorialInfo();
                 combinatorialInfo.templateURI = cell.getParent().value;
             }
-            // this.metadataService.setSelectedCombinatorialInfo(combinatorialInfo.makeCopy());
+            this.metadataService.setSelectedCombinatorialInfo(combinatorialInfo.makeCopy());
         }
     }
     nullifyMetadata() {
-        //   this.metadataService.setSelectedGlyphInfo(null);
-        //   this.metadataService.setSelectedModuleInfo(null);
-        //   this.metadataService.setSelectedInteractionInfo(null);
+        this.metadataService.setSelectedGlyphInfo(null);
+        this.metadataService.setSelectedModuleInfo(null);
+        this.metadataService.setSelectedInteractionInfo(null);
         //   // Empty 'StyleInfo' object indicates that nothing is selected, so no options should be available
-        //   this.metadataService.setSelectedStyleInfo(new StyleInfo([]));
+        this.metadataService.setSelectedStyleInfo(new style_info_js_1.StyleInfo([]));
     }
     /**
        * Attempts some auto formatting on the graph.

@@ -8,6 +8,7 @@ import * as mxDragSource from 'mxgraph';
 import * as mxGraph from 'mxgraph';
 import { GraphBase, mx } from './graph-base.js';
 import { GraphService } from './graph.service.js';
+import { MetadataService } from './metadata.service.js';
 import { StyleInfo } from './style-info.js';
 import { environment } from './environment.js';
 import { Info } from './info.js';
@@ -25,7 +26,7 @@ import { InteractionInfo } from './interactionInfo.js';
  */
 export class GraphHelpers extends GraphBase {
 
-    constructor(glyphService: GlyphService) {
+    constructor(glyphService: GlyphService, protected metadataService: MetadataService) {
         super(glyphService);
 
         // initalize the GlyphInfoDictionary
@@ -1124,7 +1125,7 @@ export class GraphHelpers extends GraphBase {
         // style first.
         if (cells && cells.length > 0) {
             const styleInfo = new StyleInfo(cells, this.graph);
-            // this.metadataService.setSelectedStyleInfo(styleInfo);
+            this.metadataService.setSelectedStyleInfo(styleInfo);
         }
 
         if (cells.length > 1) {
@@ -1145,7 +1146,7 @@ export class GraphHelpers extends GraphBase {
             else
                 moduleInfo = this.getFromInfoDict(cell.value);
             if (moduleInfo) {
-                // this.metadataService.setSelectedModuleInfo(moduleInfo.makeCopy());
+                this.metadataService.setSelectedModuleInfo(moduleInfo.makeCopy());
             }
         } else if ((!cell && this.graph.getCurrentRoot().isComponentView()) || (cell && (cell.isSequenceFeatureGlyph() || cell.isMolecularSpeciesGlyph() || cell.isCircuitContainer()))) {
             let glyphInfo;
@@ -1154,13 +1155,13 @@ export class GraphHelpers extends GraphBase {
             else
                 glyphInfo = this.getFromInfoDict(cell.value);
             if (glyphInfo) {
-                // this.metadataService.setSelectedGlyphInfo(glyphInfo.makeCopy());
+                this.metadataService.setSelectedGlyphInfo(glyphInfo.makeCopy());
             }
         }
         else if (cell.isInteraction() || cell.isInteractionNode()) {
             let interactionInfo = this.getFromInteractionDict(cell.value);
             if (interactionInfo) {
-               // this.metadataService.setSelectedInteractionInfo(interactionInfo.makeCopy());
+               this.metadataService.setSelectedInteractionInfo(interactionInfo.makeCopy());
             }
         }
 
@@ -1171,17 +1172,17 @@ export class GraphHelpers extends GraphBase {
                 combinatorialInfo = new CombinatorialInfo();
                 combinatorialInfo.templateURI = cell.getParent().value;
             }
-            // this.metadataService.setSelectedCombinatorialInfo(combinatorialInfo.makeCopy());
+            this.metadataService.setSelectedCombinatorialInfo(combinatorialInfo.makeCopy());
         }
     }
 
     nullifyMetadata() {
-      //   this.metadataService.setSelectedGlyphInfo(null);
-      //   this.metadataService.setSelectedModuleInfo(null);
-      //   this.metadataService.setSelectedInteractionInfo(null);
+         this.metadataService.setSelectedGlyphInfo(null);
+         this.metadataService.setSelectedModuleInfo(null);
+         this.metadataService.setSelectedInteractionInfo(null);
 
       //   // Empty 'StyleInfo' object indicates that nothing is selected, so no options should be available
-      //   this.metadataService.setSelectedStyleInfo(new StyleInfo([]));
+         this.metadataService.setSelectedStyleInfo(new StyleInfo([]));
     }
 
     /**

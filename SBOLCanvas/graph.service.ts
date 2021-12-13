@@ -8,7 +8,7 @@
 
 import * as mxCell from 'mxgraph';
 import { GlyphInfo } from './glyphInfo.js';
-// import { MetadataService } from './metadata.service';
+import { MetadataService } from './metadata.service';
 import { GlyphService } from './glyph.service.js';
 import { InteractionInfo } from './interactionInfo.js';
 import { environment } from './environment.js';
@@ -22,8 +22,8 @@ import { CombinatorialInfo } from './combinatorialInfo.js';
 
 export class GraphService extends GraphHelpers {
 
-  constructor(glyphService: GlyphService) {
-    super(glyphService);
+  constructor(glyphService: GlyphService, metadataService: MetadataService) {
+    super(glyphService, metadataService);
 
     this.graph.getSelectionModel().addListener(mx.mxEvent.CHANGE, mx.mxUtils.bind(this, this.handleSelectionChange));
   }
@@ -1228,7 +1228,7 @@ export class GraphService extends GraphHelpers {
 
     this.fitCamera();
 
-    // this.metadataService.setComponentDefinitionMode(this.graph.getCurrentRoot().isComponentView());
+    this.metadataService.setComponentDefinitionMode(this.graph.getCurrentRoot().isComponentView());
 
     // top level compDefs may not have cells referencing them, but they still end up with view cells for other reasons
     this.trimUnreferencedCells();
@@ -1607,7 +1607,7 @@ export class GraphService extends GraphHelpers {
       this.addBackbone();
     }
 
-    // this.metadataService.setComponentDefinitionMode(!moduleMode);
+    this.metadataService.setComponentDefinitionMode(!moduleMode);
 
     this.updateAngularMetadata(this.graph.getSelectionCells());
 
@@ -1620,7 +1620,7 @@ export class GraphService extends GraphHelpers {
    * @param componentMode True if you want to be in component mode, false if module mode.
    */
   public setComponentDefinitionMode(componentMode: boolean) {
-    // this.metadataService.setComponentDefinitionMode(componentMode);
+    this.metadataService.setComponentDefinitionMode(componentMode);
   }
 
 }
