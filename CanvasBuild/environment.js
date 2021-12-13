@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.environment = void 0;
 exports.environment = {
     production: false,
-    backendURL: 'http://localhost:8080/SBOLCanvasBackend',
+    backendURL: 'https://sbolcanvas.org/api',
     baseURI: "https://sbolcanvas.org"
 };
 /*

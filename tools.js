@@ -17,7 +17,7 @@ module.exports = {
    },
 
    convertSBOLtoMxGraph: async (sbol) => {
-      const response = await axios.post('http://localhost:8080/SBOLCanvasBackend/convert/toMxGraph', sbol);
+      const response = await axios.post('https://sbolcanvas.org/api/convert/toMxGraph', sbol);
       return response.data;
    },
 
