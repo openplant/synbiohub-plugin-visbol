@@ -1109,8 +1109,10 @@ export class GraphService extends GraphHelpers {
       root.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', mx.mxConstants.NS_XLINK);
     }
 
-    root.setAttribute('width', (Math.ceil(bounds.width * scale / vs) + 2 * border + 10) + 'px');
-    root.setAttribute('height', (Math.ceil(bounds.height * scale / vs) + 2 * border) + 'px');
+    const width = (Math.ceil(bounds.width * scale / vs) + 2 * border + 10);
+    const height = (Math.ceil(bounds.height * scale / vs) + 2 * border);
+    root.setAttribute('width', width + 'px');
+    root.setAttribute('height', height + 'px');
     root.setAttribute('version', '1.1');
 
     // Adds group for anti-aliasing via transform
@@ -1129,7 +1131,11 @@ export class GraphService extends GraphHelpers {
     imgExport.drawState(this.graph.getView().getState(this.graph.getCurrentRoot()), svgCanvas);
 
     var xml = mx.mxUtils.getXml(root).replace("alpha=\"NaN\"", "alpha=\"1\"");
-    return xml;
+    return {
+      xml: xml,
+      width: width,
+      height: height
+    }
   }
 
   exportImage(filename: string, format: string) {

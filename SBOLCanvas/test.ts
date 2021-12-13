@@ -17,4 +17,4 @@ const xml =
 `;
 
 service.setGraphToXML(xml);
-service.exportImage("test", "png");
+console.log(service.exportSVG("test"));

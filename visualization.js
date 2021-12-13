@@ -16,6 +16,11 @@ for (var [key, val] of iterate_object(window.__INITIAL_DATA__)) {
    data[key] = val;
 }
 
-const display = prepareDisplay(data.displayList);
+if (data.svg) {
+   render(<Renderer svg={data.svg} width={data.width} height={data.height} />, document.getElementById("plugin-visual-visbol"));
+}
+else {
+   const display = prepareDisplay(data.displayList);
 
-render(<Renderer display={display} />, document.getElementById("plugin-visual-visbol"));
+   render(<Renderer display={display} />, document.getElementById("plugin-visual-visbol"));
+}

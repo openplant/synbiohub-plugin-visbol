@@ -23,11 +23,13 @@ module.exports = {
       return populateTemplate(content);
    },
 
-   createSVG: (svg) => {
+   createSVG: (properties, hostAddress) => {
       const content =
       `
+      <script type="text/javascript">window.__INITIAL_DATA__ = ${serialize(properties)}</script>
+      <script type="text/javascript" src="http://${hostAddress}/visbol.js" charset="utf-8"></script>
       <div>
-         ${svg}
+         ${properties.svg}
       </div>
       `
 

@@ -57,8 +57,14 @@ app.post('/Run', async (req, res) => {
       } else {
          const mxGraph = await convertSBOLtoMxGraph(sbol);
          const svg = mxGraphToSVG(mxGraph);
+
+         const properties = {
+            svg: svg.xml,
+            width: svg.width,
+            height: svg.height
+         }
          console.log(svg);
-         res.send(createSVG(svg));
+         res.send(createSVG(properties, hostAddress));
       }
    }
    catch (error) {

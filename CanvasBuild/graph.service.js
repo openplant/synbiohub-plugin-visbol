@@ -676,7 +676,6 @@ class GraphService extends graph_helpers_js_1.GraphHelpers {
         finally {
             this.graph.getModel().endUpdate();
         }
-        console.log(this.graph.getModel().cells);
     }
     makeInteractionNodeDragsource(element, stylename) {
         const insertGlyph = graph_base_js_1.mx.mxUtils.bind(this, (graph, evt, target, x, y) => {
@@ -1009,8 +1008,10 @@ class GraphService extends graph_helpers_js_1.GraphHelpers {
             // KNOWN: Ignored in IE9-11, adds namespace for each image element instead. No workaround.
             root.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', graph_base_js_1.mx.mxConstants.NS_XLINK);
         }
-        root.setAttribute('width', (Math.ceil(bounds.width * scale / vs) + 2 * border + 10) + 'px');
-        root.setAttribute('height', (Math.ceil(bounds.height * scale / vs) + 2 * border) + 'px');
+        const width = (Math.ceil(bounds.width * scale / vs) + 2 * border + 10);
+        const height = (Math.ceil(bounds.height * scale / vs) + 2 * border);
+        root.setAttribute('width', width + 'px');
+        root.setAttribute('height', height + 'px');
         root.setAttribute('version', '1.1');
         // Adds group for anti-aliasing via transform
         var group = (svgDoc.createElementNS != null) ? svgDoc.createElementNS(graph_base_js_1.mx.mxConstants.NS_SVG, 'g') : svgDoc.createElement('g');
@@ -1025,7 +1026,11 @@ class GraphService extends graph_helpers_js_1.GraphHelpers {
         svgCanvas.foAltText = '[Not supported by viewer]';
         imgExport.drawState(this.graph.getView().getState(this.graph.getCurrentRoot()), svgCanvas);
         var xml = graph_base_js_1.mx.mxUtils.getXml(root).replace("alpha=\"NaN\"", "alpha=\"1\"");
-        return xml;
+        return {
+            xml: xml,
+            width: width,
+            height: height
+        };
     }
     exportImage(filename, format) {
         let bg = '#ffffff';
