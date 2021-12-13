@@ -63,7 +63,6 @@ app.post('/Run', async (req, res) => {
             width: svg.width,
             height: svg.height
          }
-         console.log(svg);
          res.send(createSVG(properties, hostAddress));
       }
    }
