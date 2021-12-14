@@ -4,7 +4,6 @@ FROM node:14
 COPY package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile
-RUN yarn build
 
 # Bundle app source
 COPY . .

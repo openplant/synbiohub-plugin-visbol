@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: "/visualization.js",
+  entry: "./src/index.js",
   output: { path: path.resolve(__dirname, "dist") },
   mode: 'production',
   resolve: {
@@ -18,7 +18,8 @@ module.exports = {
       "url": false,
       "https": false,
       "http": false
-    } 
+    },
+    extensions: ['.ts', '.js']
   },
   module: {
     rules: [
