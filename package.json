@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "local": "node localserver.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production"
   },
