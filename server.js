@@ -41,8 +41,9 @@ app.post('/Run', async (req, res) => {
    let url = req.body.complete_sbol;
    const type = req.body.type;
    const hostAddress = req.get("host");
-   // if (type === 'Layout') for local dev
-   //    url = url.replace('https://synbiohub.org', 'http://localhost:7777');
+   // uncomment the following 2 lines if running the plugin locally
+   // if (type === 'Layout') //for local dev
+   //     url = url.replace('https://synbiohub.org', 'http://localhost:7777');
    console.log(`Run url=${url} : host address=${hostAddress}`);
    try {
       const sbol = await getSBOLFromUrl(url);
