@@ -15,7 +15,7 @@ Follow the instructions on the [GitHub README](https://github.com/SynBioHub/synb
 ![configuration](./images/configuration.png)
 
 1. Clone the VisBOL2.1 Plugin repository `git clone https://github.com/SynBioHub/Plugin-Visual-VisBOL.git`
-2. Change to the VisBOL2.1 Plugin directory `cd sequence-view-plugin`
+2. Change to the VisBOL2.1 Plugin directory `cd Plugin-Visual-VisBOL`
 3. Install all the dependencies `yarn install`
 4. Build the repository `yarn run build`
 
