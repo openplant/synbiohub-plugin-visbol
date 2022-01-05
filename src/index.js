@@ -12,7 +12,7 @@ function* iterate_object(o) {
    }
 }
 const data = {};
-for (var [key, val] of iterate_object(window.__INITIAL_DATA__)) {
+for (var [key, val] of iterate_object(window.__INITIAL_STATE__)) {
    data[key] = val;
 }
 
