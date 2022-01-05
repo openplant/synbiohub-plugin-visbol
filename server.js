@@ -82,4 +82,4 @@ app.get('/visbol.js', (req, res) => {
 });
 
 // start server
-app.listen(port, () => console.log(`VisBOL plugin listening at http://${address}:${port}`));
+app.listen(port, () => console.log(`VisBOL plugin listening at https://${address}:${port}`));
