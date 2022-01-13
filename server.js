@@ -1,8 +1,7 @@
 const express = require('express');
 const { createRendering, createError, createSVG } = require('./templates.js');
 const { getSBOLFromUrl, convertSBOLtoMxGraph, mxGraphToSVG } = require('./tools.js');
-const { createDisplay } = require('visbol');
-const prepareDisplay = require('visbol').prepareDisplay;
+const { createDisplay, prepareDisplay } = require('visbol');
 const path = require("path");
 
 // set up server
@@ -51,6 +50,7 @@ app.post('/Run', async (req, res) => {
       if (type !== 'Layout') {
          const displayList = await createDisplay(sbol);
          const display = prepareDisplay(displayList);
+         display.renderGlyphs();
 
          const properties = {
             display
