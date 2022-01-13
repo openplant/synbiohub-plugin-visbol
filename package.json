@@ -7,7 +7,7 @@
     "start": "node server.js",
     "local": "node localserver.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production --stats-modules-space 999"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "Visualization"
   ],
   "browser": {
-    "[module-name]": false   
+    "[module-name]": false
   },
   "author": "Benjamin Hatch",
   "license": "ISC",
@@ -38,12 +38,12 @@
     "react-dom": "^17.0.2",
     "regenerator-runtime": "^0.13.9",
     "rxjs": "^7.4.0",
-    "sbolmeta": "^0.3.2",
+    "sbolmeta-go": "^0.0.5",
     "serialize-javascript": "^6.0.0",
     "sha1": "^1.1.1",
     "urijs": "^1.19.7",
-    "visbol": "^2.0.18",
-    "visbol-react": "^1.0.88"
+    "visbol": "^2.0.22",
+    "visbol-react": "^1.0.92"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
