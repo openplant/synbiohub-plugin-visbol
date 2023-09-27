@@ -7,6 +7,7 @@ const {
 } = require("./tools.js");
 const { createDisplay, prepareDisplay } = require("visbol");
 const path = require("path");
+const util = require("util");
 
 // set up server
 const app = express();
@@ -42,8 +43,8 @@ app.post("/Evaluate", (req, res) => {
 });
 
 app.get("/RunLocal", async (req, res) => {
-  // let url = "https://synbiohub.org/public/SEGA/SEGA008/1/sbol";
-  let url = "https://synbiohub.org/public/igem/BBa_K1033221/1/sbol";
+  let url = "https://synbiohub.org/public/SEGA/SEGA008/1/sbol";
+  // let url = "https://synbiohub.org/public/igem/BBa_K1033221/1/sbol";
   const type = "";
   const hostAddress = req.get("host");
   // uncomment the following 2 lines if running the plugin locally
@@ -62,6 +63,22 @@ app.get("/RunLocal", async (req, res) => {
       const properties = {
         display,
       };
+
+      properties.display.toPlace.forEach((item, i) => {
+        if (item.hooks.link) {
+          // const str = JSON.stringify(
+          //   item.hooks.link,
+          //   getCircularReplacer()
+          // );
+          if (properties.display.toPlace[i]) {
+            properties.display.toPlace[i].hooks.link.startGlyph = "[Circular]";
+            properties.display.toPlace[
+              i
+            ].hooks.link.destinationGlyph.hookedTo.startGlyph = "[Circular]";
+          }
+        }
+      });
+
       res.send(createRendering(properties, hostAddress));
     } else {
       const mxGraph = await convertSBOLtoMxGraph(sbol);
@@ -71,7 +88,6 @@ app.get("/RunLocal", async (req, res) => {
         width: svg.width,
         height: svg.height,
       };
-      const createdSVG = createSVG(properties, hostAddress);
       res.send(createSVG(properties, hostAddress));
     }
   } catch (error) {
@@ -103,6 +119,23 @@ app.post("/Run", async (req, res) => {
       const properties = {
         display,
       };
+
+      properties.display.toPlace.forEach((item, i) => {
+        if (item.hooks.link) {
+          // const str = JSON.stringify(
+          //   item.hooks.link,
+          //   getCircularReplacer()
+          // );
+
+          if (properties.display.toPlace[i]) {
+            properties.display.toPlace[i].hooks.link.startGlyph = "[Circular]";
+            properties.display.toPlace[
+              i
+            ].hooks.link.destinationGlyph.hookedTo.startGlyph = "[Circular]";
+          }
+        }
+      });
+
       res.send(createRendering(properties, hostAddress));
     } else {
       const mxGraph = await convertSBOLtoMxGraph(sbol);
@@ -112,7 +145,6 @@ app.post("/Run", async (req, res) => {
         width: svg.width,
         height: svg.height,
       };
-      const createdSVG = createSVG(properties, hostAddress);
       res.send(createSVG(properties, hostAddress));
     }
   } catch (error) {
@@ -133,3 +165,24 @@ app.get("/visbol.js", (req, res) => {
 app.listen(port, () =>
   console.log(`VisBOL plugin listening at http://${address}:${port}`)
 );
+
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value#examples
+// with this function you can check where are circular dependencies
+
+function getCircularReplacer() {
+  const ancestors = [];
+  return function (key, value) {
+    if (typeof value !== "object" || value === null) {
+      return value;
+    }
+    while (ancestors.length > 0 && ancestors.at(-1) !== this) {
+      ancestors.pop();
+    }
+    if (ancestors.includes(value)) {
+      return "[Circular]";
+    }
+    ancestors.push(value);
+    return value;
+  };
+}
