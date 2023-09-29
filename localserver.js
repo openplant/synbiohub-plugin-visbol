@@ -1,4 +1,5 @@
 const express = require("express");
+const { setSvgGlyphs, getVisbolSequence } = require("./src/lib/visbol-glyphs");
 const { createRendering, createError, createSVG } = require("./templates.js");
 const {
   getSBOLFromUrl,
@@ -7,7 +8,9 @@ const {
 } = require("./tools.js");
 const { createDisplay, prepareDisplay } = require("visbol");
 const path = require("path");
-const util = require("util");
+
+// this library is useful for checking circular references
+// const util = require("util");
 
 // set up server
 const app = express();
@@ -44,7 +47,6 @@ app.post("/Evaluate", (req, res) => {
 
 app.get("/RunLocal", async (req, res) => {
   let url = "https://synbiohub.org/public/SEGA/SEGA008/1/sbol";
-  // let url = "https://synbiohub.org/public/igem/BBa_K1033221/1/sbol";
   const type = "";
   const hostAddress = req.get("host");
   // uncomment the following 2 lines if running the plugin locally
@@ -57,29 +59,19 @@ app.get("/RunLocal", async (req, res) => {
     const sbol = await getSBOLFromUrl(url);
     if (type !== "Layout") {
       const displayList = await createDisplay(sbol);
+      const visbolSequence = getVisbolSequence(displayList);
+
       const display = prepareDisplay(displayList);
       display.renderGlyphs();
 
       const properties = {
         display,
+        visbolSequence,
       };
 
-      properties.display.toPlace.forEach((item, i) => {
-        if (item.hooks.link) {
-          // const str = JSON.stringify(
-          //   item.hooks.link,
-          //   getCircularReplacer()
-          // );
-          if (properties.display.toPlace[i]) {
-            properties.display.toPlace[i].hooks.link.startGlyph = "[Circular]";
-            properties.display.toPlace[
-              i
-            ].hooks.link.destinationGlyph.hookedTo.startGlyph = "[Circular]";
-          }
-        }
-      });
+      const computedProperties = setSvgGlyphs(properties);
 
-      res.send(createRendering(properties, hostAddress));
+      res.send(createRendering(computedProperties, hostAddress));
     } else {
       const mxGraph = await convertSBOLtoMxGraph(sbol);
       const svg = mxGraphToSVG(mxGraph);
@@ -113,6 +105,8 @@ app.post("/Run", async (req, res) => {
     const sbol = await getSBOLFromUrl(url);
     if (type !== "Layout") {
       const displayList = await createDisplay(sbol);
+      const visbolSequence = getVisbolSequence(displayList);
+
       const display = prepareDisplay(displayList);
       display.renderGlyphs();
 
@@ -120,23 +114,9 @@ app.post("/Run", async (req, res) => {
         display,
       };
 
-      properties.display.toPlace.forEach((item, i) => {
-        if (item.hooks.link) {
-          // const str = JSON.stringify(
-          //   item.hooks.link,
-          //   getCircularReplacer()
-          // );
+      const computedProperties = setSvgGlyphs(properties);
 
-          if (properties.display.toPlace[i]) {
-            properties.display.toPlace[i].hooks.link.startGlyph = "[Circular]";
-            properties.display.toPlace[
-              i
-            ].hooks.link.destinationGlyph.hookedTo.startGlyph = "[Circular]";
-          }
-        }
-      });
-
-      res.send(createRendering(properties, hostAddress));
+      res.send(createRendering(computedProperties, hostAddress));
     } else {
       const mxGraph = await convertSBOLtoMxGraph(sbol);
       const svg = mxGraphToSVG(mxGraph);
@@ -165,7 +145,6 @@ app.get("/visbol.js", (req, res) => {
 app.listen(port, () =>
   console.log(`VisBOL plugin listening at http://${address}:${port}`)
 );
-
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value#examples
 // with this function you can check where are circular dependencies
