@@ -46,6 +46,7 @@ app.post("/Evaluate", (req, res) => {
 });
 
 app.get("/RunLocal", async (req, res) => {
+  // let url = "https://synbiohub.org/public/igem/BBa_J176041/1";
   let url = "https://synbiohub.org/public/SEGA/SEGA008/1/sbol";
   const type = "";
   const hostAddress = req.get("host");
@@ -66,7 +67,7 @@ app.get("/RunLocal", async (req, res) => {
 
       const properties = {
         display,
-        visbolSequence,
+        visbolSequence: displayList.visbolSequence,
       };
 
       const computedProperties = setSvgGlyphs(properties);

@@ -29,6 +29,7 @@ module.exports = {
   },
 
   getVisbolSequence: (displayList) => {
+    let visbolSequence = [];
     displayList.components.flatMap((d) =>
       d.segments.flatMap((f) =>
         f.sequence.map(({ tooltip }) => {
@@ -46,6 +47,13 @@ module.exports = {
             {}
           );
 
+          visbolSequence.push({
+            name: Name,
+            identifier: Identifier,
+            orientation: Orientation,
+            role: Role,
+          });
+
           return {
             name: Name,
             identifier: Identifier,
@@ -56,6 +64,8 @@ module.exports = {
       )
     );
 
-    return displayList.compo;
+    displayList.visbolSequence = visbolSequence;
+
+    return displayList;
   },
 };
