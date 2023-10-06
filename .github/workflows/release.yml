@@ -10,15 +10,15 @@ jobs:
     name: Build image and push to Docker Hub
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      name: Checkout source code
-    - name: Build the Docker image
-      run: |
-        docker build . --tag synbiohub/plugin-visual-visbol:snapshot
-    - uses: azure/docker-login@v1
-      with:
+      - uses: actions/checkout@v2
+        name: Checkout source code
+      - name: Build the Docker image
+        run: |
+          docker build . --tag synbiohub/plugin-visual-visbol:snapshot
+      - uses: azure/docker-login@v1
+        with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: Push the image to Docker Hub
-      run: |
-        docker push synbiohub/plugin-visual-visbol:snapshot
+      - name: Push the image to Docker Hub
+        run: |
+          docker push synbiohub/plugin-visual-visbol:snapshot

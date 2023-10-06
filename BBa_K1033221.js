@@ -1,53 +1,52 @@
 window.__INITIAL_STATE__ = {
   display: {
     glyphDictionary: {
-      "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1":
-        [
-          {
-            name: "BBa_K1033221",
-            id: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
-            uri: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
-            type: "promoter",
-            strand: "positive",
-            isComposite: false,
-            tooltip:
-              "Component\nIdentifier: BBa_K1033221\nName: BBa_K1033221\nDescription: Promoter CP11\niGEM Part Type: Regulatory\nRole: promoter\n",
-            hookedTo: undefined,
-            isMain: true,
-            root: {
-              name: "BBa_K1033221",
-              uri: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
-              id: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
-              connected: [],
-              updatedPos: false,
-              backbone: { topologies: [], start: undefined, end: undefined },
-            },
-            labelLocation: { x: 0, y: 20 },
-            isGlyph: true,
-            glyphIndex: 0,
-            coords: [0, 0],
-            rendering: undefined,
-            hooks: {
-              north: null,
-              south: null,
-              east: null,
-              west: null,
-              link: null,
-            },
-            visited: true,
-            dimensions: [15, 20],
-            defaultString:
-              '\n    \u003Csvg  version="1.1"\n        xmlns="http:\u002F\u002Fwww.w3.org\u002F2000\u002Fsvg"\n        xmlns:parametric="https:\u002F\u002Fparametric-svg.github.io\u002Fv0.2"\n        width="100"\n        height="100"\n        glyphtype="Promoter"\n        soterms="SO:0000167"\n        parametric:defaults="arrowbody_height=15;arrowbody_width=15;arrowhead_height=4;arrowhead_width=4;baseline_offset=0;baseline_x=0;baseline_y=25;pad_after=2;pad_before=2;"\u003E\n        \u003Cg\u003E\n        \u003Cpath\n            id="promoter-body" \n            parametric:d="M{baseline_x+pad_before},{(baseline_y-baseline_offset)} L{baseline_x+pad_before},{(baseline_y-baseline_offset)-arrowbody_height} L{baseline_x+pad_before+arrowbody_width},{(baseline_y-baseline_offset)-arrowbody_height}" \n            d="M2,25 L2,10 L17,10" \n            fill="none"\n            stroke="#03c03c"\n            stroke-width="1pt"\n            stroke-linejoin="round"\n            stroke-linecap="round" \u002F\u003E\n\n        \u003Cpath\n            id="promoter-head" \n            parametric:d="M{baseline_x+pad_before+arrowbody_width-arrowhead_width},{(baseline_y-baseline_offset)-arrowbody_height-arrowhead_height} L{baseline_x+pad_before+arrowbody_width},{(baseline_y-baseline_offset)-arrowbody_height} L{baseline_x+pad_before+arrowbody_width-arrowhead_width},{(baseline_y-baseline_offset)-arrowbody_height+arrowhead_height}" \n            d="M13,6 L17,10 L13,14" \n            fill="none"\n            stroke="#03c03c"\n            stroke-width="1pt"\n            stroke-linejoin="round"\n            stroke-linecap="round" \u002F\u003E \n        \u003C\u002Fg\u003E\n    \u003C\u002Fsvg\u003E',
-            inset: 0,
-            link: undefined,
+      'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1': [
+        {
+          name: 'BBa_K1033221',
+          id: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
+          uri: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
+          type: 'promoter',
+          strand: 'positive',
+          isComposite: false,
+          tooltip:
+            'Component\nIdentifier: BBa_K1033221\nName: BBa_K1033221\nDescription: Promoter CP11\niGEM Part Type: Regulatory\nRole: promoter\n',
+          hookedTo: undefined,
+          isMain: true,
+          root: {
+            name: 'BBa_K1033221',
+            uri: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
+            id: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
+            connected: [],
+            updatedPos: false,
+            backbone: { topologies: [], start: undefined, end: undefined },
           },
-        ],
+          labelLocation: { x: 0, y: 20 },
+          isGlyph: true,
+          glyphIndex: 0,
+          coords: [0, 0],
+          rendering: undefined,
+          hooks: {
+            north: null,
+            south: null,
+            east: null,
+            west: null,
+            link: null,
+          },
+          visited: true,
+          dimensions: [15, 20],
+          defaultString:
+            '\n    \u003Csvg  version="1.1"\n        xmlns="http:\u002F\u002Fwww.w3.org\u002F2000\u002Fsvg"\n        xmlns:parametric="https:\u002F\u002Fparametric-svg.github.io\u002Fv0.2"\n        width="100"\n        height="100"\n        glyphtype="Promoter"\n        soterms="SO:0000167"\n        parametric:defaults="arrowbody_height=15;arrowbody_width=15;arrowhead_height=4;arrowhead_width=4;baseline_offset=0;baseline_x=0;baseline_y=25;pad_after=2;pad_before=2;"\u003E\n        \u003Cg\u003E\n        \u003Cpath\n            id="promoter-body" \n            parametric:d="M{baseline_x+pad_before},{(baseline_y-baseline_offset)} L{baseline_x+pad_before},{(baseline_y-baseline_offset)-arrowbody_height} L{baseline_x+pad_before+arrowbody_width},{(baseline_y-baseline_offset)-arrowbody_height}" \n            d="M2,25 L2,10 L17,10" \n            fill="none"\n            stroke="#03c03c"\n            stroke-width="1pt"\n            stroke-linejoin="round"\n            stroke-linecap="round" \u002F\u003E\n\n        \u003Cpath\n            id="promoter-head" \n            parametric:d="M{baseline_x+pad_before+arrowbody_width-arrowhead_width},{(baseline_y-baseline_offset)-arrowbody_height-arrowhead_height} L{baseline_x+pad_before+arrowbody_width},{(baseline_y-baseline_offset)-arrowbody_height} L{baseline_x+pad_before+arrowbody_width-arrowhead_width},{(baseline_y-baseline_offset)-arrowbody_height+arrowhead_height}" \n            d="M13,6 L17,10 L13,14" \n            fill="none"\n            stroke="#03c03c"\n            stroke-width="1pt"\n            stroke-linejoin="round"\n            stroke-linecap="round" \u002F\u003E \n        \u003C\u002Fg\u003E\n    \u003C\u002Fsvg\u003E',
+          inset: 0,
+          link: undefined,
+        },
+      ],
     },
     roots: [
       {
-        name: "BBa_K1033221",
-        uri: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
-        id: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
+        name: 'BBa_K1033221',
+        uri: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
+        id: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
         connected: [],
         updatedPos: false,
         backbone: { topologies: [], start: undefined, end: undefined },
@@ -59,20 +58,20 @@ window.__INITIAL_STATE__ = {
     largestInset: 0,
     toPlace: [
       {
-        name: "BBa_K1033221",
-        id: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
-        uri: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
-        type: "promoter",
-        strand: "positive",
+        name: 'BBa_K1033221',
+        id: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
+        uri: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
+        type: 'promoter',
+        strand: 'positive',
         isComposite: false,
         tooltip:
-          "Component\nIdentifier: BBa_K1033221\nName: BBa_K1033221\nDescription: Promoter CP11\niGEM Part Type: Regulatory\nRole: promoter\n",
+          'Component\nIdentifier: BBa_K1033221\nName: BBa_K1033221\nDescription: Promoter CP11\niGEM Part Type: Regulatory\nRole: promoter\n',
         hookedTo: undefined,
         isMain: true,
         root: {
-          name: "BBa_K1033221",
-          uri: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
-          id: "https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1",
+          name: 'BBa_K1033221',
+          uri: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
+          id: 'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1',
           connected: [],
           updatedPos: false,
           backbone: { topologies: [], start: undefined, end: undefined },
@@ -94,4 +93,4 @@ window.__INITIAL_STATE__ = {
     backbones: [{ topologies: [], start: undefined, end: undefined }],
     updatedRootLocation: false,
   },
-};
+}

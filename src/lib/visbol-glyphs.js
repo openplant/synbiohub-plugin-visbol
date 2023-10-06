@@ -6,66 +6,63 @@ function removeCircularReferences(properties) {
       //   getCircularReplacer()
       // );
       if (item) {
-        item.hooks.link.startGlyph = "[Circular]";
-        item.hooks.link.destinationGlyph.hookedTo.startGlyph = "[Circular]";
+        item.hooks.link.startGlyph = '[Circular]'
+        item.hooks.link.destinationGlyph.hookedTo.startGlyph = '[Circular]'
       }
     }
-  });
+  })
 
-  return properties;
+  return properties
 }
 
 module.exports = {
   setSvgGlyphs: (properties) => {
-    const computedProperities = removeCircularReferences(properties);
+    const computedProperities = removeCircularReferences(properties)
 
     computedProperities.display.toPlace.map((item, i) => {
       item.defaultString =
-        '<svg width="100" height="100"><rect stroke="yellow" width="100" height="100" x="0" y="0" fill="red" /></svg>';
-      return item;
-    });
+        '<svg width="100" height="100"><rect stroke="yellow" width="100" height="100" x="0" y="0" fill="red" /></svg>'
+      return item
+    })
 
-    return computedProperities;
+    return computedProperities
   },
 
   getVisbolSequence: (displayList) => {
-    let visbolSequence = [];
+    let visbolSequence = []
     displayList.components.flatMap((d) =>
       d.segments.flatMap((f) =>
         f.sequence.map(({ tooltip }) => {
-          let arr = tooltip.split("\n");
+          let arr = tooltip.split('\n')
 
-          let { Name, Identifier, Orientation, Role } = arr.reduce(
-            (acc, curr) => {
-              if (curr.includes(":")) {
-                const [key, value] = curr.split(":");
-                return { ...acc, [key]: value.trim() };
-              }
+          let { Name, Identifier, Orientation, Role } = arr.reduce((acc, curr) => {
+            if (curr.includes(':')) {
+              const [key, value] = curr.split(':')
+              return { ...acc, [key]: value.trim() }
+            }
 
-              return acc;
-            },
-            {}
-          );
+            return acc
+          }, {})
 
           visbolSequence.push({
             name: Name,
             identifier: Identifier,
             orientation: Orientation,
             role: Role,
-          });
+          })
 
           return {
             name: Name,
             identifier: Identifier,
             orientation: Orientation,
             role: Role,
-          };
+          }
         })
       )
-    );
+    )
 
-    displayList.visbolSequence = visbolSequence;
+    displayList.visbolSequence = visbolSequence
 
-    return displayList;
+    return displayList
   },
-};
+}
