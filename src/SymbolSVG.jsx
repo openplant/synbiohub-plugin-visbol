@@ -56,6 +56,7 @@ const ICON_MAPPING = {
   'protein-inline': ProteinInline,
   'recombination-site-inline': RecombinationSiteInline,
   'res-inline': ResInline,
+  'ribosome_entry_site-inline': ResInline, // EXCEPTION
   'restriction-site-inline': RestrictionSiteInline,
   'rna-inline': RnaInline,
   'signature-inline': SignatureInline,
