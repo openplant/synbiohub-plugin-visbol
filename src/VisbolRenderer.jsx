@@ -11,7 +11,6 @@ function lighter(color) {
 function computeTextColor(bgColor) {
   const darkText = '#151515'
   const lightText = '#FFFFFF'
-  console.log(d3.color(bgColor).l)
   return d3.hsl(bgColor).l < 0.5 ? lightText : darkText
 }
 
@@ -45,46 +44,34 @@ export const VisbolRenderer = ({ visbolSequence }) => {
 }
 
 const VisbolCard = ({ info, colorScale }) => {
-  const { name, identifier, orientation, role } = info
-
-  const infoWithLabel = [
-    { label: 'Name', value: name },
-    { label: 'SYMBOL', symbol: role },
-    { label: 'Feature Identifier', value: identifier },
-    { label: 'Orientation', value: orientation },
-    { label: 'Role', value: role },
-  ]
+  const { name, identifier, orientation, role, segment } = info
   const color = colorScale(name)
   const lighterColor = lighter(color)
 
   return (
     <div
       style={{
-        width: 190,
-        height: 320,
+        display: 'flex',
+        flexDirection: 'column',
+        flex: '0 0 190px',
+        margin: '0 2px',
         borderWidth: 2,
         borderStyle: 'solid',
         borderColor: color,
-        margin: '0 2px',
-        display: 'flex',
-        flexDirection: 'column',
+        fontSize: 14,
+        fontWeight: 500,
       }}
     >
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '6em',
+          minHeight: '3.5em',
           color: computeTextColor(color),
           backgroundColor: color,
           width: '100%',
-          display: '-webkit-box',
-          WebkitBoxOrient: 'vertical',
-          WebkitLineClamp: 2,
           overflow: 'hidden',
-          fontSize: 14,
           padding: 4,
+          fontSize: 16,
         }}
       >
         {name}
@@ -97,16 +84,51 @@ const VisbolCard = ({ info, colorScale }) => {
           padding: 4,
         }}
       >
-        {infoWithLabel.map(({ label, value, symbol }) =>
-          value ? (
-            <div>
-              <div style={{ fontSize: 14, fontWeight: 400, color: '#a3a3a3' }}>{label}</div>
-              <div style={{ fontSize: 14, fontWeight: 500 }}>{value}</div>
+        <div>
+          <div style={{ fontSize: 16, color: '#a3a3a3' }}>{role}</div>
+        </div>
+
+        <div style={{ width: '100%', height: 160 }}>
+          <div style={{ outline: 'black 2px solid', height: '100%' }} />
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: '0 0 auto',
+            padding: '8px 6px',
+            gap: 6,
+          }}
+        >
+          <div style={{ flex: '0 0 auto' }}>
+            <div style={{ color: '#a3a3a3' }}>Feature Identifier</div>
+            <div>{identifier}</div>
+          </div>
+
+          <div style={{ flex: '0 0 auto' }}>
+            <div style={{ color: '#a3a3a3' }}>Orientation</div>
+            <div>{orientation}</div>
+          </div>
+
+          <div style={{ display: 'flex', flex: '1 0 auto' }} />
+
+          <div style={{ flex: '0 0 auto' }}>
+            <div style={{ color: '#a3a3a3' }}>Segment</div>
+            <div style={{ display: 'flex', flex: '0 0 auto' }}>
+              <div>{segment[0]}</div>
+              <div
+                style={{
+                  flex: '1 1 100%',
+                  borderBottom: '2px solid black',
+                  height: '12px',
+                  margin: '0 5px',
+                }}
+              />
+              <div>{segment[1]}</div>
             </div>
-          ) : symbol ? (
-            `SYMBOL`
-          ) : null
-        )}
+          </div>
+        </div>
       </div>
     </div>
   )

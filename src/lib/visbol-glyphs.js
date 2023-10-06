@@ -29,40 +29,33 @@ module.exports = {
   },
 
   getVisbolSequence: (displayList) => {
-    let visbolSequence = []
-    displayList.components.flatMap((d) =>
+    const visbolSequence = displayList.components.flatMap((d) =>
       d.segments.flatMap((f) =>
-        f.sequence.map(({ tooltip }) => {
-          let arr = tooltip.split('\n')
+        f.sequence.flatMap(({ tooltip }) => {
+          const arr = tooltip.split('\n')
 
-          let { Name, Identifier, Orientation, Role } = arr.reduce((acc, curr) => {
+          const { Name, Identifier, Orientation, Role, Segment } = arr.reduce((acc, curr) => {
             if (curr.includes(':')) {
               const [key, value] = curr.split(':')
               return { ...acc, [key]: value.trim() }
+            } else if (curr.includes('..')) {
+              return { ...acc, Segment: curr.split('..').map(Number) }
             }
-
             return acc
           }, {})
-
-          visbolSequence.push({
-            name: Name,
-            identifier: Identifier,
-            orientation: Orientation,
-            role: Role,
-          })
 
           return {
             name: Name,
             identifier: Identifier,
             orientation: Orientation,
             role: Role,
+            segment: Segment,
           }
         })
       )
     )
+    console.log(visbolSequence)
 
-    displayList.visbolSequence = visbolSequence
-
-    return displayList
+    return visbolSequence
   },
 }
