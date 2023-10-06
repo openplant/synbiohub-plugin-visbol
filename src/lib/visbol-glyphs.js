@@ -54,7 +54,6 @@ module.exports = {
         })
       )
     )
-    console.log(visbolSequence)
 
     return visbolSequence
   },

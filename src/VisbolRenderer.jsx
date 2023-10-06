@@ -1,6 +1,7 @@
 import React from 'react'
 import * as d3 from 'd3'
 import './VisbolRenderer.css'
+import SymbolSVG from './SymbolSVG.jsx'
 
 function lighter(color) {
   const lighterColor = d3.color(color)
@@ -89,7 +90,7 @@ const VisbolCard = ({ info, colorScale }) => {
         </div>
 
         <div style={{ width: '100%', height: 160 }}>
-          <div style={{ outline: 'black 2px solid', height: '100%' }} />
+          <SymbolSVG role={role} orientation={orientation} />
         </div>
 
         <div
