@@ -69,8 +69,8 @@ const ICON_MAPPING = {
 export default function SymbolSVG({ role, orientation }) {
   let Icon = ICON_MAPPING[`${role}-${orientation}`]
   if (!Icon) {
-    console.warn(`Missing icon for role = "${role}"!`)
-    Icon = () => <path d="M0,0 L190,160 M190,0 L0,160" stroke="black" strokeWidth="2" />
+    console.warn(`Missing icon for role = "${role}"! Using the icon "unspecified"...`)
+    Icon = UnspecifiedInline
   }
   return (
     <svg width="190px" height="160px">
