@@ -52,13 +52,14 @@ app.get('/RunLocal', async (req, res) => {
     if (type !== 'Layout') {
       const displayList = await createDisplay(sbol)
       const visbolSequence = getVisbolSequence(displayList)
+      displayList.visbolSequence = visbolSequence
 
       const display = prepareDisplay(displayList)
       display.renderGlyphs()
 
       const properties = {
         display,
-        visbolSequence: displayList.visbolSequence,
+        visbolSequence,
       }
 
       const computedProperties = setSvgGlyphs(properties)

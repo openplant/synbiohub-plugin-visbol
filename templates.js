@@ -15,8 +15,10 @@ module.exports = {
   createError: (error) => {
     const content = `
       Error while parsing the file for VisBOL rendering:
-      ${error}
+      <br/>
+      <pre>${error.stack}</pre>
       `
+    console.error(error)
 
     return populateTemplate(content)
   },
