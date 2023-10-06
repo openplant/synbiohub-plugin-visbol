@@ -1,10 +1,11 @@
 <svg width="100" height="160" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 80H100" stroke="black" stroke-width="2"/>
-<path d="M47.4805 95C55.7647 95 62.4805 88.2843 62.4805 80C62.4805 71.7157 55.7647 65 47.4805 65C39.1962 65 32.4805 71.7157 32.4805 80C32.4805 88.2843 39.1962 95 47.4805 95Z" fill="white" stroke="black" stroke-width="4"/>
-<path d="M47.4805 80.04L67.5205 60L47.4805 80.04Z" fill="black"/>
+<path d="M0 80H33" stroke="black" stroke-width="2"/>
+<path d="M62 80H100" stroke="black" stroke-width="2"/>
+<path d="M47.4805 95C55.7647 95 62.4805 88.2843 62.4805 80C62.4805 71.7157 55.7647 65 47.4805 65C39.1962 65 32.4805 71.7157 32.4805 80C32.4805 88.2843 39.1962 95 47.4805 95Z" stroke="black" stroke-width="4"/>
+<path d="M47.4805 80.04L67.5205 60Z" fill="black"/>
 <path d="M47.4805 80.04L67.5205 60" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M67.5205 70L67.5205 60L67.5205 70Z" fill="black"/>
+<path d="M67.5205 70L67.5205 60Z" fill="black"/>
 <path d="M67.5205 70L67.5205 60" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M57.4805 60L67.4805 60L57.4805 60Z" fill="black"/>
+<path d="M57.4805 60L67.4805 60Z" fill="black"/>
 <path d="M57.4805 60L67.4805 60" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

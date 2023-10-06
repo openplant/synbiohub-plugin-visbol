@@ -74,7 +74,7 @@ export default function SymbolSVG({ role, orientation }) {
   }
   return (
     <svg width="190px" height="160px">
-      <path d="M0,80 L190,80" stroke="black" strokeWidth="2.2" />
+      <path d="M0,80 L40,80 M140,80 L190,80" stroke="black" strokeWidth="2" />
       <Icon x={40} viewBox="0 40 100 80" />
     </svg>
   )
