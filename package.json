@@ -8,8 +8,8 @@
     "start-local-server": "nodemon --exec babel-node localserver.js",
     "local-default": "node localserver.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production --stats-modules-space 999",
-    "build-dev": "nodemon --watch src/ -e js,jsx --exec yarn build",
+    "build": "webpack --stats-modules-space 999 --mode production",
+    "build-dev": "webpack --stats-modules-space 999 --mode development --watch",
     "local": "concurrently \"yarn build-dev\" \"yarn start-local-server\""
   },
   "repository": {

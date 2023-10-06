@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.js",
   output: { path: path.resolve(__dirname, "dist") },
-  mode: "production",
+  // mode: "production", // Passed in as command line option
   stats: {},
   resolve: {
     fallback: {
