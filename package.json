@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --stats-modules-space 999 --mode production",
     "build-dev": "webpack --stats-modules-space 999 --mode development --watch",
-    "local": "concurrently \"yarn build-dev\" \"yarn start-local-server\""
+    "local": "concurrently \"yarn build-dev\" \"yarn start-local-server\"",
+    "prettier": "prettier --write '**/*'"
   },
   "repository": {
     "type": "git",
