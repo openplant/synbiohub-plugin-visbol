@@ -1,19 +1,18 @@
 // import { Injectable } from '@angular/core';
 
-declare var require: any;
+declare var require: any
 const mx = require('mxgraph')({
   mxImageBasePath: 'mxgraph/images',
-  mxBasePath: 'mxgraph'
-});
+  mxBasePath: 'mxgraph',
+})
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
 // @Injectable({
 //   providedIn: 'root'
 // })
 export class GlyphService {
-
   // TODO load list of xml files from server
   private sequenceFeatureXMLs: string[] = [
     // Strand glyphs
@@ -53,7 +52,7 @@ export class GlyphService {
     './assets/glyph_stencils/sequence_feature/transcription-end.xml',
     './assets/glyph_stencils/sequence_feature/translation-end.xml',
     //'assets/glyph_stencils/sequence_feature/test.xml',
-  ];
+  ]
 
   private molecularSpeciesXMLs: string[] = [
     // 'molecular species' glyphs aka protein?
@@ -64,7 +63,7 @@ export class GlyphService {
     './assets/glyph_stencils/molecular_species/no-glyph-assigned-ms.xml',
     './assets/glyph_stencils/molecular_species/replacement-glyph.xml',
     './assets/glyph_stencils/molecular_species/complex.xml',
-  ];
+  ]
 
   private interactionXMLs: string[] = [
     './assets/glyph_stencils/interactions/control.xml',
@@ -72,7 +71,7 @@ export class GlyphService {
     './assets/glyph_stencils/interactions/stimulation.xml',
     './assets/glyph_stencils/interactions/process.xml',
     './assets/glyph_stencils/interactions/degradation.xml',
-  ];
+  ]
 
   private interactionNodeXMLs: string[] = [
     './assets/glyph_stencils/interaction_nodes/association.xml',
@@ -85,88 +84,86 @@ export class GlyphService {
     './assets/glyph_stencils/indicators/composite.xml',
     './assets/glyph_stencils/indicators/variant.xml',
     './assets/glyph_stencils/indicators/error.xml',
-  ];
+  ]
 
   private utilXMLs: string[] = [
     './assets/backbone.xml',
     './assets/textBox.xml',
     './assets/module.xml',
-  ];
+  ]
 
-
-  private sequenceFeatures: any = {};
-  private molecularSpecies: any = {};
-  private interactions: any = {};
-  private interactionNodes: any = {};
-  private indicators: any = {};
-  private utils: any = {};
+  private sequenceFeatures: any = {}
+  private molecularSpecies: any = {}
+  private interactions: any = {}
+  private interactionNodes: any = {}
+  private indicators: any = {}
+  private utils: any = {}
 
   constructor() {
-    this.loadXMLs(this.sequenceFeatureXMLs, this.sequenceFeatures);
-    this.loadXMLs(this.molecularSpeciesXMLs, this.molecularSpecies);
-    this.loadXMLs(this.interactionNodeXMLs, this.interactionNodes);
-    this.loadXMLs(this.interactionXMLs, this.interactions);
-    this.loadXMLs(this.indicatorXMLs, this.indicators);
-    this.loadXMLs(this.utilXMLs, this.utils);
+    this.loadXMLs(this.sequenceFeatureXMLs, this.sequenceFeatures)
+    this.loadXMLs(this.molecularSpeciesXMLs, this.molecularSpecies)
+    this.loadXMLs(this.interactionNodeXMLs, this.interactionNodes)
+    this.loadXMLs(this.interactionXMLs, this.interactions)
+    this.loadXMLs(this.indicatorXMLs, this.indicators)
+    this.loadXMLs(this.utilXMLs, this.utils)
   }
 
   loadXMLs(xml_list, glyph_list) {
     xml_list.forEach((filename) => {
-      const __dirname = path.resolve();
-      let req = mx.mxUtils.parseXml(fs.readFileSync(path.join(__dirname, "SBOLCanvas", filename)));
-      let root = req.documentElement;
-      let shape = root.firstChild;
-
+      const __dirname = path.resolve()
+      let req = mx.mxUtils.parseXml(fs.readFileSync(path.join(__dirname, 'SBOLCanvas', filename)))
+      let root = req.documentElement
+      let shape = root.firstChild
 
       while (shape != null) {
         if (shape.nodeType == mx.mxConstants.NODETYPE_ELEMENT) {
-          const name = shape.getAttribute('name');
-          const centered = shape.getAttribute('centered');
+          const name = shape.getAttribute('name')
+          const centered = shape.getAttribute('centered')
 
-          const stencil = new mx.mxStencil(shape);
+          const stencil = new mx.mxStencil(shape)
 
-          glyph_list[name] = [stencil, (centered && centered.toLowerCase() == 'true')];
+          glyph_list[name] = [stencil, centered && centered.toLowerCase() == 'true']
         }
-        shape = shape.nextSibling;
+        shape = shape.nextSibling
       }
-    });
+    })
   }
 
   getElements(glyph_list) {
-    const svgs = {};
+    const svgs = {}
 
     for (const name in glyph_list) {
-      const stencil = glyph_list[name][0];
+      const stencil = glyph_list[name][0]
 
-      let elt = document.createElement('svg');
-      let canvas = new mx.mxSvgCanvas2D(elt);
-      let shape = new mx.mxShape(stencil);
+      let elt = document.createElement('svg')
+      let canvas = new mx.mxSvgCanvas2D(elt)
+      let shape = new mx.mxShape(stencil)
 
-      canvas.setStrokeColor('#000000');
-      canvas.setFillColor('none');
+      canvas.setStrokeColor('#000000')
+      canvas.setFillColor('none')
 
-      stencil.drawShape(canvas, shape, 0, 0, 50, 50);
+      stencil.drawShape(canvas, shape, 0, 0, 50, 50)
 
-      svgs[name] = elt;
+      svgs[name] = elt
     }
 
-    return svgs;
+    return svgs
   }
 
   getSequenceFeatureGlyphs() {
-    return this.sequenceFeatures;
+    return this.sequenceFeatures
   }
 
   getMolecularSpeciesGlyphs() {
-    return this.molecularSpecies;
+    return this.molecularSpecies
   }
 
-  getIndicatorGlyphs(){
-    return this.indicators;
+  getIndicatorGlyphs() {
+    return this.indicators
   }
 
-  getInteractionNodeGlyphs(){
-    return this.interactionNodes;
+  getInteractionNodeGlyphs() {
+    return this.interactionNodes
   }
 
   getUtilElements() {
@@ -174,18 +171,18 @@ export class GlyphService {
   }
 
   getInteractionElements() {
-    return this.getElements(this.interactions);
+    return this.getElements(this.interactions)
   }
 
-  getInteractionNodeElements(){
-    return this.getElements(this.interactionNodes);
+  getInteractionNodeElements() {
+    return this.getElements(this.interactionNodes)
   }
 
   getMolecularSpeciesElements() {
-    return this.getElements(this.molecularSpecies);
+    return this.getElements(this.molecularSpecies)
   }
 
   getSequenceFeatureElements() {
-    return this.getElements(this.sequenceFeatures);
+    return this.getElements(this.sequenceFeatures)
   }
 }

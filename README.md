@@ -23,11 +23,11 @@ If you're using the plugin on your local SynBioHub, run `yarn run local`. It ass
 
 Once you have the local plugin running, you can test it out by creating a design in SBOLCanvas, downloading the file as an SBOL file, and uploading it back to your local SynBioHub. You can then click on the top level layout object and view the plugin to see the design on SBOLCanvas.
 
-There are two important things to note here. 
+There are two important things to note here.
 
-1) The visualization arrows don't seem to be accurately reflected by the plugin visualization. This is probably due to the plugin using a virtual DOM.
+1. The visualization arrows don't seem to be accurately reflected by the plugin visualization. This is probably due to the plugin using a virtual DOM.
 
-2) If the SBOLCanvas file has already been uploaded to SynBioHub, it can cause the submission to behave strangely, and will sometimes prevent the plugin from being able to read the layout file. Only submit brand new designs for testing.
+2. If the SBOLCanvas file has already been uploaded to SynBioHub, it can cause the submission to behave strangely, and will sometimes prevent the plugin from being able to read the layout file. Only submit brand new designs for testing.
 
 If you're not planning to use the plugin on a local SynBioHub, you will be using server.js. You can run it using `yarn run start`. This should be configured to work if used on the official SynBioHub. See the Publish section below.
 

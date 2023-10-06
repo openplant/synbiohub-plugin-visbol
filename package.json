@@ -5,9 +5,13 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "local": "node localserver.js",
+    "start-local-server": "nodemon --exec babel-node localserver.js",
+    "local-default": "node localserver.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production --stats-modules-space 999"
+    "build": "webpack --stats-modules-space 999 --mode production",
+    "build-dev": "webpack --stats-modules-space 999 --mode development --watch",
+    "local": "concurrently \"yarn build-dev\" \"yarn start-local-server\"",
+    "prettier": "prettier --write '**/*'"
   },
   "repository": {
     "type": "git",
@@ -28,12 +32,16 @@
   },
   "homepage": "https://github.com/benjhatch/Plugin-Visual-VisBOL#readme",
   "dependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@types/react": "^17.0.34",
     "axios": "^0.24.0",
     "axios-observable": "^1.3.0",
+    "concurrently": "^8.2.1",
+    "d3": "^7.8.5",
     "express": "^4.17.1",
     "jsdom": "^18.1.0",
     "mxgraph": "^4.2.2",
+    "nodemon": "^3.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "regenerator-runtime": "^0.13.9",
@@ -47,10 +55,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
+    "@babel/node": "^7.22.19",
     "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
     "babel-loader": "^8.2.3",
+    "css-loader": "^6.8.1",
+    "style-loader": "^3.3.3",
     "webpack": "^5.61.0",
     "webpack-cli": "^4.9.1"
   }
