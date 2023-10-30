@@ -6,7 +6,7 @@ module.exports = {
       return item
     })
 
-    return computedProperities
+    return properties
   },
 
   getVisbolSequence: (displayList) => {
