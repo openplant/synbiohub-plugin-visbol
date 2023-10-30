@@ -48,10 +48,7 @@ app.post('/Run', async (req, res) => {
   console.log(`Run url=${url} : host address=${hostAddress}`)
 
   try {
-    console.log('Requesting sbol...')
     const sbol = await getSBOLFromUrl(url)
-    console.log('Got it!')
-    console.log('Type:', type)
     if (type !== 'Layout') {
       const displayList = await createDisplay(sbol)
       const visbolSequence = getVisbolSequence(displayList)
@@ -66,8 +63,6 @@ app.post('/Run', async (req, res) => {
       }
 
       const computedProperties = setSvgGlyphs(removeCircularReferences(properties))
-
-      console.log(computedProperties)
 
       res.send(createRendering(computedProperties, hostAddress))
     } else {
