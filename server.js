@@ -1,13 +1,17 @@
 const express = require('express')
+const { setSvgGlyphs, getVisbolSequence } = require('./src/lib/visbol-glyphs')
 const { createRendering, createError, createSVG } = require('./templates.js')
 const { getSBOLFromUrl, convertSBOLtoMxGraph, mxGraphToSVG } = require('./tools.js')
 const { createDisplay, prepareDisplay } = require('visbol')
 const path = require('path')
 
+// this library is useful for checking circular references
+// const util = require("util");
+
 // set up server
 const app = express()
-const port = 5000
-const address = 'localhost'
+const port = 5012
+const address = '0.0.0.0'
 
 app.use(express.json())
 
@@ -39,27 +43,36 @@ app.post('/Evaluate', (req, res) => {
 app.post('/Run', async (req, res) => {
   let url = req.body.complete_sbol
   const type = req.body.type
-  const hostAddress = req.get('host')
-  // uncomment the following 2 lines if running the plugin locally
-  // if (type === 'Layout') //for local dev
-  //     url = url.replace('https://synbiohub.org', 'http://localhost:7777');
+  const hostAddress = 'synbiohub.accurat.io:5003' //req.get('host')
+  // if (type === 'Layout') url = url.replace('https://synbiohub.org', 'http://localhost:7777')
   console.log(`Run url=${url} : host address=${hostAddress}`)
+
   try {
+    console.log('Requesting sbol...')
     const sbol = await getSBOLFromUrl(url)
+    console.log('Got it!')
+    console.log('Type:', type)
     if (type !== 'Layout') {
       const displayList = await createDisplay(sbol)
+      const visbolSequence = getVisbolSequence(displayList)
+      displayList.visbolSequence = visbolSequence
+
       const display = prepareDisplay(displayList)
       display.renderGlyphs()
 
       const properties = {
         display,
+        visbolSequence,
       }
 
-      res.send(createRendering(properties, hostAddress))
+      const computedProperties = setSvgGlyphs(properties)
+
+      console.log(computedProperties)
+
+      res.send(createRendering(computedProperties, hostAddress))
     } else {
       const mxGraph = await convertSBOLtoMxGraph(sbol)
       const svg = mxGraphToSVG(mxGraph)
-
       const properties = {
         svg: svg.xml,
         width: svg.width,
@@ -68,6 +81,7 @@ app.post('/Run', async (req, res) => {
       res.send(createSVG(properties, hostAddress))
     }
   } catch (error) {
+    console.error(error)
     res.send(createError(error))
   }
 })
@@ -77,9 +91,28 @@ app.post('/Run', async (req, res) => {
 // Gets built rendering file to be sent
 // to browser
 app.get('/visbol.js', (req, res) => {
-  const __dirname = path.resolve()
-  res.sendFile(path.join(__dirname, 'dist', 'main.js'))
+  res.sendFile(path.join(path.resolve(), 'dist', 'main.js'))
 })
 
 // start server
-app.listen(port, () => console.log(`VisBOL plugin listening at https://${address}:${port}`))
+app.listen(port, () => console.log(`VisBOL plugin listening at http://${address}:${port}`))
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value#examples
+// with this function you can check where are circular dependencies
+
+function getCircularReplacer() {
+  const ancestors = []
+  return function (key, value) {
+    if (typeof value !== 'object' || value === null) {
+      return value
+    }
+    while (ancestors.length > 0 && ancestors.at(-1) !== this) {
+      ancestors.pop()
+    }
+    if (ancestors.includes(value)) {
+      return '[Circular]'
+    }
+    ancestors.push(value)
+    return value
+  }
+}
