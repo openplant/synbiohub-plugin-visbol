@@ -1,25 +1,6 @@
-function removeCircularReferences(properties) {
-  properties.display.toPlace.forEach((item, i) => {
-    if (item.hooks.link) {
-      // const str = JSON.stringify(
-      //   item.hooks.link,
-      //   getCircularReplacer()
-      // );
-      if (item) {
-        item.hooks.link.startGlyph = '[Circular]'
-        item.hooks.link.destinationGlyph.hookedTo.startGlyph = '[Circular]'
-      }
-    }
-  })
-
-  return properties
-}
-
 module.exports = {
   setSvgGlyphs: (properties) => {
-    const computedProperities = removeCircularReferences(properties)
-
-    computedProperities.display.toPlace.map((item, i) => {
+    properties.display.toPlace.map((item, i) => {
       item.defaultString =
         '<svg width="100" height="100"><rect stroke="yellow" width="100" height="100" x="0" y="0" fill="red" /></svg>'
       return item

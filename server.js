@@ -65,7 +65,7 @@ app.post('/Run', async (req, res) => {
         visbolSequence,
       }
 
-      const computedProperties = setSvgGlyphs(properties)
+      const computedProperties = setSvgGlyphs(removeCircularReferences(properties))
 
       console.log(computedProperties)
 
@@ -100,19 +100,15 @@ app.listen(port, () => console.log(`VisBOL plugin listening at http://${address}
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value#examples
 // with this function you can check where are circular dependencies
 
-function getCircularReplacer() {
-  const ancestors = []
-  return function (key, value) {
-    if (typeof value !== 'object' || value === null) {
-      return value
+function removeCircularReferences(properties) {
+  properties.display.toPlace.forEach((item, i) => {
+    if (item.hooks.link) {
+      if (item) {
+        item.hooks.link.startGlyph = '[Circular]'
+        item.hooks.link.destinationGlyph.hookedTo.startGlyph = '[Circular]'
+      }
     }
-    while (ancestors.length > 0 && ancestors.at(-1) !== this) {
-      ancestors.pop()
-    }
-    if (ancestors.includes(value)) {
-      return '[Circular]'
-    }
-    ancestors.push(value)
-    return value
-  }
+  })
+
+  return properties
 }
