@@ -43,7 +43,7 @@ app.post('/Evaluate', (req, res) => {
 app.post('/Run', async (req, res) => {
   let url = req.body.complete_sbol
   const type = req.body.type
-  const hostAddress = 'synbiohub.accurat.io:5003' //req.get('host')
+  const hostAddress = req.get('host')
   // if (type === 'Layout') url = url.replace('https://synbiohub.org', 'http://localhost:7777')
   console.log(`Run url=${url} : host address=${hostAddress}`)
 
