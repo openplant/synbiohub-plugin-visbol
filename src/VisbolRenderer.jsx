@@ -51,6 +51,7 @@ const VisbolCard = ({ info, colorScale }) => {
 
   return (
     <div
+      className="roboto-sans"
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -59,8 +60,6 @@ const VisbolCard = ({ info, colorScale }) => {
         borderWidth: 2,
         borderStyle: 'solid',
         borderColor: color,
-        fontSize: 14,
-        fontWeight: 500,
       }}
     >
       <div
