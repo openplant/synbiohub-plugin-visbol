@@ -3,16 +3,16 @@ const { render } = require('react-dom')
 const Renderer = require('visbol-react').default
 const { VisbolRenderer } = require('./VisbolRenderer.jsx')
 
-const data = window.__INITIAL_STATE__
+const data = window.__DATA_ACCURAT_VISBOL__
 
 if (data.svg) {
   render(
     <Renderer svg={data.svg} width={data.width} height={data.height} />,
-    document.getElementById('plugin-visual-visbol')
+    document.getElementById('root--accurat-visbol')
   )
 } else {
   render(
     <VisbolRenderer display={data.display} visbolSequence={data.visbolSequence} />,
-    document.getElementById('plugin-visual-visbol')
+    document.getElementById('root--accurat-visbol')
   )
 }

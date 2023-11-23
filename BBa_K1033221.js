@@ -1,4 +1,4 @@
-window.__INITIAL_STATE__ = {
+window.__DATA_ACCURAT_VISBOL__ = {
   display: {
     glyphDictionary: {
       'https:\u002F\u002Fsynbiohub.org\u002Fpublic\u002Figem\u002FBBa_K1033221\u002F1': [

@@ -4,7 +4,9 @@ module.exports = {
   // returning the visbol rendering
   createRendering: (properties, hostAddress) => {
     const content = `
-      <script type="text/javascript">window.__INITIAL_STATE__ = ${serialize(properties)}</script>
+      <script type="text/javascript">window.__DATA_ACCURAT_VISBOL__ = ${serialize(
+        properties
+      )}</script>
       <script type="text/javascript" src="http://${hostAddress}/visbol.js" charset="utf-8"></script>
       `
 
@@ -25,7 +27,9 @@ module.exports = {
 
   createSVG: (properties, hostAddress) => {
     const content = `
-      <script type="text/javascript">window.__INITIAL_STATE__ = ${serialize(properties)}</script>
+      <script type="text/javascript">window.__DATA_ACCURAT_VISBOL__ = ${serialize(
+        properties
+      )}</script>
       <script type="text/javascript" src="https://${hostAddress}/visbol.js" charset="utf-8"></script>
       <div>
          ${properties.svg}
@@ -43,7 +47,7 @@ const populateTemplate = (content) =>
 <html>
    <head><title>VisBOL</title></head>
    <body>
-      <div id="plugin-visual-visbol">
+      <div id="root--accurat-visbol">
       ${content}
       </div>
    </body>
