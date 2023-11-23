@@ -7,7 +7,7 @@ module.exports = {
       <script type="text/javascript">window.__DATA_ACCURAT_VISBOL__ = ${serialize(
         properties
       )}</script>
-      <script type="text/javascript" src="http://${hostAddress}/visbol.js" charset="utf-8"></script>
+      <script type="text/javascript" src="//${hostAddress}/visbol.js" charset="utf-8"></script>
       `
 
     return populateTemplate(content)
@@ -30,7 +30,7 @@ module.exports = {
       <script type="text/javascript">window.__DATA_ACCURAT_VISBOL__ = ${serialize(
         properties
       )}</script>
-      <script type="text/javascript" src="https://${hostAddress}/visbol.js" charset="utf-8"></script>
+      <script type="text/javascript" src="//${hostAddress}/visbol.js" charset="utf-8"></script>
       <div>
          ${properties.svg}
       </div>
@@ -48,7 +48,7 @@ const populateTemplate = (content) =>
    <head><title>VisBOL</title></head>
    <body>
       <div id="root--accurat-visbol">
-      ${content}
+        ${content}
       </div>
    </body>
 </html>
