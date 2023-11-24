@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500&display=swap');
 
-* {
+#root--accurat-visbol * {
   box-sizing: border-box;
 }
 
-.roboto {
+#root--accurat-visbol .roboto {
   font-family: 'Roboto Mono', monospace;
   font-size: 14px;
   font-weight: 500;
