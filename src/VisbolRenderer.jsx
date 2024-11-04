@@ -99,6 +99,7 @@ const VisbolCard = ({ info, colorScale }) => {
             flex: '0 0 auto',
             padding: '8px 6px',
             gap: 6,
+            fontSize: 14,
           }}
         >
           <div style={{ flex: '0 0 auto' }}>
