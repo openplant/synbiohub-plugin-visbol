@@ -5,6 +5,8 @@ const { VisbolRenderer } = require('./VisbolRenderer.jsx')
 
 const data = window.__DATA_ACCURAT_VISBOL__
 
+console.log('__DATA_ACCURAT_VISBOL__', data)
+
 if (data.svg) {
   render(
     <Renderer svg={data.svg} width={data.width} height={data.height} />,

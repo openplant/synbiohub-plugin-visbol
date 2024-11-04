@@ -16,7 +16,6 @@ const address = '0.0.0.0'
 app.use(express.json())
 
 // ACCESS: PUBLIC
-// Route = /Status
 // Returns whether plugin is up and running
 app.get('/Status', (req, res) => {
   console.log('Status checked')
@@ -24,7 +23,6 @@ app.get('/Status', (req, res) => {
 })
 
 // ACCESS: PUBLIC
-// Route = /Evaluate
 // Returns whether type is compatible with plugin
 // (this needs to be developed more, don't know all
 // the types VisBOL is compatible with)
@@ -37,15 +35,14 @@ app.post('/Evaluate', (req, res) => {
 })
 
 // ACCESS: PUBLIC
-// Route = /Run
 // Returns html for VisBOL rendering
 // in a web application
 app.post('/Run', async (req, res) => {
-  let url = req.body.complete_sbol
+  const url = req.body.complete_sbol
   const type = req.body.type
   const hostAddress = req.get('host')
   // if (type === 'Layout') url = url.replace('https://synbiohub.org', 'http://localhost:7777')
-  console.log(`Run url=${url} : host address=${hostAddress}`)
+  console.log(`Run url=${url} // hostAddress=${hostAddress} // type=${type}`)
 
   try {
     const sbol = await getSBOLFromUrl(url)
@@ -82,7 +79,6 @@ app.post('/Run', async (req, res) => {
 })
 
 // ACCESS: PUBLIC
-// Route = /visbol.js
 // Gets built rendering file to be sent
 // to browser
 app.get('/visbol.js', (req, res) => {

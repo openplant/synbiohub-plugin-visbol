@@ -47,8 +47,8 @@ const populateTemplate = (content) =>
 <html>
    <head><title>VisBOL</title></head>
    <body>
+      ${content}
       <div id="root--accurat-visbol">
-        ${content}
       </div>
    </body>
 </html>

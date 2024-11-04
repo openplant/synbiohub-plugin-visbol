@@ -4,13 +4,11 @@
   "description": "A plugin API for web applications to use VisBOL",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "start-local-server": "nodemon --exec babel-node localserver.js",
-    "local-default": "node localserver.js",
+    "start": "nodemon --exec babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --stats-modules-space 999 --mode production",
     "build-dev": "webpack --stats-modules-space 999 --mode development --watch",
-    "local": "concurrently \"yarn build-dev\" \"yarn start-local-server\"",
+    "local": "concurrently \"yarn build-dev\" \"yarn start\"",
     "prettier": "prettier --write '**/*'"
   },
   "repository": {
