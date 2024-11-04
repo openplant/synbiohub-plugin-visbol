@@ -73,7 +73,7 @@ const VisbolCard = ({ info, colorScale }) => {
         </div>
 
         <div style={{ width: '100%', height: 160 }}>
-          <SymbolSVG role={role} orientation={orientation} />
+          <SymbolSVG role={role} orientation={orientation ?? 'inline'} />
         </div>
 
         <div
