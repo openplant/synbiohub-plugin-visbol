@@ -51,16 +51,8 @@ const VisbolCard = ({ info, colorScale }) => {
 
   return (
     <div
-      className="roboto-sans"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        flex: '0 0 190px',
-        margin: '0 2px',
-        borderWidth: 2,
-        borderStyle: 'solid',
-        borderColor: color,
-      }}
+      className="card roboto-sans"
+      style={{ borderColor: color }}
     >
       <div
         className="card-title-wrapper"
@@ -73,13 +65,11 @@ const VisbolCard = ({ info, colorScale }) => {
       <div
         style={{
           backgroundColor: lighterColor,
-          height: '100%',
-          width: '100%',
           padding: 4,
         }}
       >
-        <div>
-          <div style={{ fontSize: 16, color: '#a3a3a3' }}>{role}</div>
+        <div className="card-subtitle-wrapper">
+          <div className="card-subtitle">{role}</div>
         </div>
 
         <div style={{ width: '100%', height: 160 }}>

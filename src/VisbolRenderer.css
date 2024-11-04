@@ -17,6 +17,16 @@
   font-weight: 400;
 }
 
+#root--accurat-visbol .card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 190px;
+  width: 190px;
+  margin: 0 2px;
+  border-width: 2;
+  border-style: solid;
+}
+
 #root--accurat-visbol .card-title-wrapper {
   display: flex;
   flex-direction: column;
@@ -33,5 +43,21 @@
   display: flex;
   padding: 4px;
   font-size: 16px;
+}
+
+#root--accurat-visbol .card-subtitle-wrapper {
+  height: 20px;
+  overflow: hidden;
+}
+#root--accurat-visbol .card-subtitle-wrapper:hover {
+  overflow: visible;
+  z-index: 2;
+}
+
+#root--accurat-visbol .card-subtitle {
+  overflow-wrap: break-word;
+  font-size: 16px;
+  color: #a3a3a3;
+  z-index: 2;
 }
 
