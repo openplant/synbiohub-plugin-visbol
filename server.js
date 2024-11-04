@@ -74,9 +74,11 @@ app.post('/Run', async (req, res) => {
         visbolSequence,
       }
 
-      const computedProperties = setSvgGlyphs(removeCircularReferences(properties))
+      const computedProperties = /* setSvgGlyphs */(removeCircularReferences(properties))
 
-      res.send(createRendering(computedProperties, hostAddress))
+      res.send(createRendering({
+        visbolSequence: computedProperties.visbolSequence,
+      }, hostAddress))
     } else {
       const mxGraph = await convertSBOLtoMxGraph(sbol)
       const svg = mxGraphToSVG(mxGraph)

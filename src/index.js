@@ -14,7 +14,7 @@ if (data.svg) {
   )
 } else {
   render(
-    <VisbolRenderer display={data.display} visbolSequence={data.visbolSequence} />,
+    <VisbolRenderer visbolSequence={data.visbolSequence} />,
     document.getElementById('root--accurat-visbol')
   )
 }
