@@ -63,18 +63,12 @@ const VisbolCard = ({ info, colorScale }) => {
       }}
     >
       <div
-        style={{
-          display: 'flex',
-          minHeight: '3.5em',
-          color: computeTextColor(color),
-          backgroundColor: color,
-          width: '100%',
-          overflow: 'hidden',
-          padding: 4,
-          fontSize: 16,
-        }}
+        className="card-title-wrapper"
+        style={{ backgroundColor: color, color: computeTextColor(color) }}
       >
-        {name}
+        <div className="card-title" style={{ backgroundColor: color }}>
+          {name}
+        </div>
       </div>
       <div
         style={{

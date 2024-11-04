@@ -17,3 +17,21 @@
   font-weight: 400;
 }
 
+#root--accurat-visbol .card-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  height: 64px;
+  overflow: hidden;
+}
+#root--accurat-visbol .card-title-wrapper:hover {
+  overflow: visible;
+  z-index: 2;
+}
+
+#root--accurat-visbol .card-title {
+  display: flex;
+  padding: 4px;
+  font-size: 16px;
+}
+
