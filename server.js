@@ -3,6 +3,7 @@ const { setSvgGlyphs, getVisbolSequence } = require('./src/lib/visbol-glyphs')
 const { createRendering, createError, createSVG } = require('./templates.js')
 const { getSBOLFromUrl, convertSBOLtoMxGraph, mxGraphToSVG } = require('./tools.js')
 const { createDisplay, prepareDisplay } = require('visbol')
+const { readFile } = require('fs/promises')
 const path = require('path')
 
 // this library is useful for checking circular references
@@ -20,6 +21,20 @@ app.use(express.json())
 app.get('/Status', (req, res) => {
   console.log('Status checked')
   res.status(200).send('VisBOL plugin up and running')
+})
+
+// ACCESS: PUBLIC
+// Endpoint used to test the /Run POST endpoint with several inputs.
+app.get('/test', (req, res) => {
+  readFile('./templates/test.html', 'utf-8').then(html => {
+    res.status(200).send(html)
+  })
+})
+
+// ACCESS: PUBLIC
+// Endpoint used to get sample datasets for the /Test page.
+app.get('/test/sample-data/:file', (req, res) => {
+  res.sendFile(path.join(path.resolve(), 'sample-data', req.params.file + '.xml'))
 })
 
 // ACCESS: PUBLIC
