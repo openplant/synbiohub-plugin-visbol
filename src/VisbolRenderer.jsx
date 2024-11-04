@@ -88,12 +88,12 @@ const VisbolCard = ({ info, colorScale }) => {
         >
           <div style={{ flex: '0 0 auto' }}>
             <div style={{ color: '#a3a3a3' }}>Feature Identifier</div>
-            <div>{identifier}</div>
+            <div>{identifier ?? '?'}</div>
           </div>
 
           <div style={{ flex: '0 0 auto' }}>
             <div style={{ color: '#a3a3a3' }}>Orientation</div>
-            <div>{orientation}</div>
+            <div>{orientation ?? '?'}</div>
           </div>
 
           <div style={{ display: 'flex', flex: '1 0 auto' }} />
@@ -101,7 +101,7 @@ const VisbolCard = ({ info, colorScale }) => {
           <div style={{ flex: '0 0 auto' }}>
             <div style={{ color: '#a3a3a3' }}>Segment</div>
             <div style={{ display: 'flex', flex: '0 0 auto' }}>
-              <div>{segment[0]}</div>
+              <div>{segment?.[0] ?? '?'}</div>
               <div
                 style={{
                   flex: '1 1 100%',
@@ -110,7 +110,7 @@ const VisbolCard = ({ info, colorScale }) => {
                   margin: '0 5px',
                 }}
               />
-              <div>{segment[1]}</div>
+              <div>{segment?.[1] ?? '?'}</div>
             </div>
           </div>
         </div>
