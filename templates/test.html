@@ -1,4 +1,7 @@
 <html>
+    <head>
+      <title>VisBol Testing</title>
+    </head>
     <form id="accurat-visbol-form">
       <select name="complete_sbol">
         <option>https://synbiohub.org/public/SEGA/SEGA003/1</option>
@@ -22,6 +25,7 @@
         padding: 15px;
         overflow: scroll;
         outline: solid 2px grey;
+        width: 1138px;
       }
     </style>
 
@@ -33,15 +37,18 @@
       const content = document.querySelector('#accurat-visbol-content')
 
       function addHostToURL(url) {
-      if (url.startsWith('/')) {
-        return `${document.location.origin}${url}`;
-      } else {
-        return url;
+        if (url.startsWith('/')) {
+          return `${document.location.origin}${url}`;
+        } else {
+          return url;
+        }
       }
-    }
 
       form.addEventListener('submit', function (event) {
         event.preventDefault()
+
+        setInnerHTML(content, 'LOADING...')
+
         const formData = Object.fromEntries(new FormData(form));
         const data = JSON.stringify({
           ...formData,
@@ -77,5 +84,7 @@
             oldScriptEl.parentNode.replaceChild(newScriptEl, oldScriptEl);
         });
       }
+
+      form.querySelector(`input[type=submit]`).click();
     </script>
   </html>
