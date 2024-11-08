@@ -1,5 +1,4 @@
 const axios = require('axios')
-const getImageOutput = require('./CanvasBuild/getImageOutput.js').default
 
 module.exports = {
   getSBOLFromUrl: async (fileUrl) => {
@@ -24,9 +23,5 @@ module.exports = {
     })
     console.log(`MxGraph obtained of ${response.data.length} bytes`)
     return response.data
-  },
-
-  mxGraphToSVG: (mxGraph) => {
-    return getImageOutput(mxGraph)
   },
 }
