@@ -1,7 +1,7 @@
 const express = require('express')
-const { setSvgGlyphs, getVisbolSequence } = require('./src/lib/visbol-glyphs')
-const { createRendering, createError, createSVG } = require('./templates.js')
-const { getSBOLFromUrl, convertSBOLtoMxGraph, mxGraphToSVG } = require('./tools.js')
+const { getVisbolSequence } = require('./src/lib/visbol-glyphs')
+const { createRendering, createError } = require('./templates.js')
+const { getSBOLFromUrl } = require('./tools.js')
 const { createDisplay, prepareDisplay } = require('visbol')
 const { readFile } = require('fs/promises')
 const path = require('path')
@@ -44,7 +44,7 @@ app.get('/test/sample-data/:file/:anything', (req, res) => {
 app.post('/Evaluate', (req, res) => {
   const type = req.body.type
   console.log(`Evaluating ${type}`)
-  if (type == 'Component' || type == 'ComponentDefinition' || type == 'Layout')
+  if (type == 'Component' || type == 'ComponentDefinition')
     res.status(200).send(`The type ${type} is compatible with the VisBOL plugin`)
   else res.status(415).send(`The type ${type} is NOT compatible with the VisBOL plugin`)
 })
@@ -56,39 +56,27 @@ app.post('/Run', async (req, res) => {
   const url = req.body.complete_sbol
   const type = req.body.type
   const hostAddress = req.get('host')
-  // if (type === 'Layout') url = url.replace('https://synbiohub.org', 'http://localhost:7777')
   console.log(`Run url=${url} // hostAddress=${hostAddress} // type=${type}`)
 
   try {
     const sbol = await getSBOLFromUrl(url)
-    if (type !== 'Layout') {
-      const displayList = await createDisplay(sbol)
-      const visbolSequence = getVisbolSequence(displayList)
-      displayList.visbolSequence = visbolSequence
+    const displayList = await createDisplay(sbol)
+    const visbolSequence = getVisbolSequence(displayList)
+    displayList.visbolSequence = visbolSequence
 
-      const display = prepareDisplay(displayList)
-      display.renderGlyphs()
+    const display = prepareDisplay(displayList)
+    display.renderGlyphs()
 
-      const properties = {
-        display,
-        visbolSequence,
-      }
-
-      const computedProperties = /* setSvgGlyphs */(removeCircularReferences(properties))
-
-      res.send(createRendering({
-        visbolSequence: computedProperties.visbolSequence,
-      }, hostAddress))
-    } else {
-      const mxGraph = await convertSBOLtoMxGraph(sbol)
-      const svg = mxGraphToSVG(mxGraph)
-      const properties = {
-        svg: svg.xml,
-        width: svg.width,
-        height: svg.height,
-      }
-      res.send(createSVG(properties, hostAddress))
+    const properties = {
+      display,
+      visbolSequence,
     }
+
+    const computedProperties = /* setSvgGlyphs */(removeCircularReferences(properties))
+
+    res.send(createRendering({
+      visbolSequence: computedProperties.visbolSequence,
+    }, hostAddress))
   } catch (error) {
     console.error(error)
     res.send(createError(error))
