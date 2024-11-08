@@ -34,9 +34,19 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd obl-synbiohub-visbol/
+            git reset --hard HEAD
             git pull
             ls -al
-      - name: "SSH: Docker Compose Up"
+      - name: 'SSH: Build'
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ vars.SSH_HOST }}
+          username: ${{ vars.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd obl-synbiohub-visbol/
+            yarn install --frozen-lockfile && yarn build
+      - name: 'SSH: Docker Compose Up'
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ vars.SSH_HOST }}
@@ -44,4 +54,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             docker compose up --build plugin-visbol -d
+            sleep 2
+            docker compose logs plugin-visbol
 

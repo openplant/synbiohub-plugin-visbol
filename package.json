@@ -4,10 +4,10 @@
   "description": "A plugin API for web applications to use VisBOL",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node server.js",
+    "start": "node dist/server.js",
     "dev": "nodemon --exec babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --stats-modules-space 999 --mode production",
+    "build": "webpack --stats-modules-space 999 --mode production; ncc build server.js -o dist; mv dist/index.js dist/server.js",
     "build-dev": "webpack --stats-modules-space 999 --mode development --watch",
     "local": "concurrently \"yarn build-dev\" \"yarn dev\"",
     "prettier": "prettier --write '**/*'"
@@ -33,6 +33,7 @@
   "dependencies": {
     "@svgr/webpack": "^8.1.0",
     "@types/react": "^17.0.34",
+    "@vercel/ncc": "^0.38.2",
     "axios": "^0.24.0",
     "axios-observable": "^1.3.0",
     "concurrently": "^8.2.1",
