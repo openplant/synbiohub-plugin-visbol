@@ -12,7 +12,7 @@ Original VisBol plugin (from using https://github.com/SynBioHub/Plugin-Visual-Vi
 New VisBol plugin (from this repo): 
 ![image](https://github.com/user-attachments/assets/51bef586-4969-4147-b974-811c0100b940)
 
-Both original and new VisBol plugins are present on each part's page: see [example]([url](https://hub.openbioeconomy.org/public/Marchantia_OpenPlant_Toolkit/OP_088/1)). 
+Both original and new VisBol plugins are present on each part's page: see [example](https://hub.openbioeconomy.org/public/Marchantia_OpenPlant_Toolkit/OP_088/1). 
 
 
 ## Development
