@@ -6,6 +6,15 @@ VisBol is a visualization plugin engine for SynBioHub that allows SBOLCanvas des
 
 Sequence Visualization Plugin is a visualization plugin engine for SynBioHub to enhance the functional annotations of DNA sequence which are coordinated with the SBOL Visual standard.
 
+Original VisBol plugin (from using https://github.com/SynBioHub/Plugin-Visual-VisBOL-Js): 
+![image](https://github.com/user-attachments/assets/68b66097-4f55-4a6d-9a85-1ab6f2fbad55)
+
+New VisBol plugin (from this repo): 
+![image](https://github.com/user-attachments/assets/51bef586-4969-4147-b974-811c0100b940)
+
+Both original and new VisBol plugins are present on each part's page: see [example]([url](https://hub.openbioeconomy.org/public/Marchantia_OpenPlant_Toolkit/OP_088/1)). 
+
+
 ## Development
 
 To start both the frontend build and the backend server in dev mode:
